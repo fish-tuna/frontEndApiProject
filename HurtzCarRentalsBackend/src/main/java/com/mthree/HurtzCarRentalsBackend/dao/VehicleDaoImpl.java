@@ -5,10 +5,33 @@
  */
 package com.mthree.HurtzCarRentalsBackend.dao;
 
+import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
+import java.util.List;
+
 /**
  *
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public class VehicleDaoImpl implements VehicleDao {
+
+    @Override
+    public Vehicle addVehicle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deleteVehicle(int vehicleId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Vehicle getVehicle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Vehicle> getAllVehicles() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
