@@ -40,7 +40,7 @@ CREATE TABLE Reservation (
   startDate DATE NOT NULL,
   beforeTaxPrice DECIMAL NOT NULL,
   endDate DATE NOT NULL,
-  discount INT NOT NULL,
+  discount DECIMAL NOT NULL,
   tax DECIMAL NOT NULL,
   totalPrice DECIMAL NOT NULL,
   FOREIGN KEY fk_customerId(customerId) REFERENCES Customer(customerId),
