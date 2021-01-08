@@ -15,8 +15,8 @@ import java.util.Objects;
 public class Reservation {
     
     int reservationId;
-    String customerLicenseNumber;
-    String vehicleLicenseNumber;
+    int customerId;
+    String licensePlate;
     Date startDate;
     Date endDate;
     double beforeTax;
@@ -26,10 +26,10 @@ public class Reservation {
 
     
 
-    public Reservation(int reservationId, String customerLicenseNumber, String vehicleLicenseNumber, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
+    public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
         this.reservationId = reservationId;
-        this.customerLicenseNumber = customerLicenseNumber;
-        this.vehicleLicenseNumber = vehicleLicenseNumber;
+        this.customerId = customerId;
+        this.licensePlate = licensePlate;
         this.startDate = startDate;
         this.endDate = endDate;
         this.beforeTax = beforeTax;
@@ -42,16 +42,16 @@ public class Reservation {
         return reservationId;
     }
     
-    public String getCustomerLicenseNumber() {
-        return customerLicenseNumber;
+    public int getCustomerId() {
+        return customerId;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 97 * hash + this.reservationId;
-        hash = 97 * hash + Objects.hashCode(this.customerLicenseNumber);
-        hash = 97 * hash + Objects.hashCode(this.vehicleLicenseNumber);
+        hash = 97 * hash + Objects.hashCode(this.customerId);
+        hash = 97 * hash + Objects.hashCode(this.licensePlate);
         hash = 97 * hash + Objects.hashCode(this.startDate);
         hash = 97 * hash + Objects.hashCode(this.endDate);
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.beforeTax) ^ (Double.doubleToLongBits(this.beforeTax) >>> 32));
@@ -88,10 +88,10 @@ public class Reservation {
         if (Double.doubleToLongBits(this.totalPrice) != Double.doubleToLongBits(other.totalPrice)) {
             return false;
         }
-        if (!Objects.equals(this.customerLicenseNumber, other.customerLicenseNumber)) {
+        if (!Objects.equals(this.customerId, other.customerId)) {
             return false;
         }
-        if (!Objects.equals(this.vehicleLicenseNumber, other.vehicleLicenseNumber)) {
+        if (!Objects.equals(this.licensePlate, other.licensePlate)) {
             return false;
         }
         if (!Objects.equals(this.startDate, other.startDate)) {
@@ -107,12 +107,12 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public void setCustomerLicenseNumber(String customerLicenseNumber) {
-        this.customerLicenseNumber = customerLicenseNumber;
+    public void setCustomerLicenseNumber(int customerId) {
+        this.customerId = customerId;
     }
 
-    public void setVehicleLicenseNumber(String vehicleLicenseNumber) {
-        this.vehicleLicenseNumber = vehicleLicenseNumber;
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public void setStartDate(Date startDate) {
@@ -139,8 +139,8 @@ public class Reservation {
         this.totalPrice = totalPrice;
     }
 
-    public String getVehicleLicenseNumber() {
-        return vehicleLicenseNumber;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
     public Date getStartDate() {

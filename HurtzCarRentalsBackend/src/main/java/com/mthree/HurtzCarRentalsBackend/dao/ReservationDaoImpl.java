@@ -42,5 +42,33 @@ public class ReservationDaoImpl implements ReservationDao {
     public Reservation addReservation(Reservation r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    public static final class ReservationMapper implements RowMapper<Reservation> {
+
+        @Override
+        public Reservation mapRow(ResultSet rs, int index) throws SQLException {
+            Reservation r = new Reservation(rs.getInt("reservationId"),
+                                            rs.getInt("customerId"),
+                                            rs.getString("licensePlate"),
+                                            rs.getDate("startDate"),
+                                            rs.getDate("endDate"),
+                                            rs.getDouble("beforeTaxPrice"),
+                                            rs.getDouble("tax"),
+                                            rs.getDouble("discount"),
+                                            rs.getDouble("totalPrice"));
+            /*
+            int reservationId;
+            String customerLicenseNumber;
+            String vehicleLicenseNumber;
+            Date startDate;
+            Date endDate;
+            double beforeTax;
+            double tax;
+            double discount;
+            double totalPrice;
+
+            
+            */
+            return r;
+        }
+    }
 }

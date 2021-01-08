@@ -12,68 +12,59 @@ import java.util.Objects;
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public class Vehicle {
-    int vehicleId;
-    String licensePlate;
-    String category;
-    String model;
-    String make;
+    String licensePlate; //primary key
+    int categoryId;
+    int modelId; 
+    String color;
 
-    public Vehicle(int vehicleId, String licensePlate, String category, String model, String make) {
-        this.vehicleId = vehicleId;
+    public Vehicle(String licensePlate, int categoryId, int modelId, String color) {
         this.licensePlate = licensePlate;
-        this.category = category;
-        this.model = model;
-        this.make = make;
+        this.categoryId = categoryId;
+        this.modelId = modelId;
+        this.color = color;
     }
-
-    public int getVehicleId() {
-        return vehicleId;
-    }
+    
+    
 
     public String getLicensePlate() {
         return licensePlate;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public String getModel() {
-        return model;
+    public int getModelId() {
+        return modelId;
     }
 
-    public String getMake() {
-        return make;
-    }
-
-    public void setVehicleId(int vehicleId) {
-        this.vehicleId = vehicleId;
+    public String getColor() {
+        return color;
     }
 
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setModelId(int modelId) {
+        this.modelId = modelId;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.vehicleId;
-        hash = 67 * hash + Objects.hashCode(this.licensePlate);
-        hash = 67 * hash + Objects.hashCode(this.category);
-        hash = 67 * hash + Objects.hashCode(this.model);
-        hash = 67 * hash + Objects.hashCode(this.make);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.licensePlate);
+        hash = 47 * hash + this.categoryId;
+        hash = 47 * hash + this.modelId;
+        hash = 47 * hash + Objects.hashCode(this.color);
         return hash;
     }
 
@@ -89,24 +80,20 @@ public class Vehicle {
             return false;
         }
         final Vehicle other = (Vehicle) obj;
-        if (this.vehicleId != other.vehicleId) {
+        if (this.categoryId != other.categoryId) {
+            return false;
+        }
+        if (this.modelId != other.modelId) {
             return false;
         }
         if (!Objects.equals(this.licensePlate, other.licensePlate)) {
             return false;
         }
-        if (!Objects.equals(this.category, other.category)) {
-            return false;
-        }
-        if (!Objects.equals(this.model, other.model)) {
-            return false;
-        }
-        if (!Objects.equals(this.make, other.make)) {
+        if (!Objects.equals(this.color, other.color)) {
             return false;
         }
         return true;
     }
-    
     
     
 }
