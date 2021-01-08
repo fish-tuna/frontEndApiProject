@@ -7,6 +7,14 @@ package com.mthree.HurtzCarRentalsBackend.dao;
 
 import com.mthree.HurtzCarRentalsBackend.entity.Reservation;
 import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -14,10 +22,6 @@ import java.util.List;
  */
 public class ReservationDaoImpl implements ReservationDao {
 
-    @Override
-    public Reservation addReservation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void deleteReservation(int reservationId) {
@@ -31,6 +35,11 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public List<Reservation> getAllReservations() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Reservation addReservation(Reservation r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

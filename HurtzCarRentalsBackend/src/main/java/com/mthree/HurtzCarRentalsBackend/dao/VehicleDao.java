@@ -13,8 +13,8 @@ import java.util.List;
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public interface VehicleDao {
-    public Vehicle addVehicle();
+    public Vehicle addVehicle(Vehicle v);
     public boolean deleteVehicle(int vehicleId);
-    public Vehicle getVehicle();
+    public Vehicle getVehicle(int vehicleId);
     public List<Vehicle> getAllVehicles();
 }

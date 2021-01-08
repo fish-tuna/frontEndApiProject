@@ -15,7 +15,7 @@ import java.util.List;
 public class VehicleDaoImpl implements VehicleDao {
 
     @Override
-    public Vehicle addVehicle() {
+    public Vehicle addVehicle(Vehicle v) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -25,7 +25,7 @@ public class VehicleDaoImpl implements VehicleDao {
     }
 
     @Override
-    public Vehicle getVehicle() {
+    public Vehicle getVehicle(int vehicleId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
