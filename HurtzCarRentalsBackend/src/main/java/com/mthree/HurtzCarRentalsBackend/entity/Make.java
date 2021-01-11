@@ -7,7 +7,7 @@ package com.mthree.HurtzCarRentalsBackend.entity;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Make {
     int makeId; 

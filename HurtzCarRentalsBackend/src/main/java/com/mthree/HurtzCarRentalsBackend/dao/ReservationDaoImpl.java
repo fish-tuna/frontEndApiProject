@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class ReservationDaoImpl implements ReservationDao {
 

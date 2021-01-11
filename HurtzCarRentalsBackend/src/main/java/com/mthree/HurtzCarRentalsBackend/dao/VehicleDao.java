@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public interface VehicleDao {
     public Vehicle getVehicleByLicensePlate(String vehicleLicensePlate);

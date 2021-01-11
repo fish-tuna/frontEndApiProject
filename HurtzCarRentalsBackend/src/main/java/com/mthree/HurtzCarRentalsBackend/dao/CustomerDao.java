@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public interface CustomerDao {
     public Customer getCustomerById(int customerId);

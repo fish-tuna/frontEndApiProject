@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Reservation {
     

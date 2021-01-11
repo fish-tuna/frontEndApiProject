@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 @Repository
 public class VehicleDaoImpl implements VehicleDao {

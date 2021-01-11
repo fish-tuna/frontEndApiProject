@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public interface ReservationDao {
     public Reservation addReservation(Reservation r);
