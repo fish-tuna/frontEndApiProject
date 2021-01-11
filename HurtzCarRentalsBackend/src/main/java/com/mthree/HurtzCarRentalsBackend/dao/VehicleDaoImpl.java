@@ -85,7 +85,7 @@ public class VehicleDaoImpl implements VehicleDao {
         final String DELETE_RESERVATION = "DELETE FROM Reservation WHERE licensePlate = ?";
         jdbc.update(DELETE_RESERVATION, licensePlate);
         
-        final String DELETE_VEHICLE = "DELETE FROM Customer WHERE customerId = ?";
+        final String DELETE_VEHICLE = "DELETE FROM Vehicle WHERE licensePlate = ?";
         jdbc.update(DELETE_VEHICLE, licensePlate);
     }
     

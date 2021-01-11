@@ -14,10 +14,12 @@ import java.util.Objects;
 public class Model {
     int modelId;
     String modelName;
+    int makeId;
 
-    public Model(int modelId, String modelName) {
+    public Model(int modelId, String modelName, int makeId) {
         this.modelId = modelId;
         this.modelName = modelName;
+        this.makeId = makeId;
     }
 
     public int getModelId() {
@@ -27,6 +29,10 @@ public class Model {
     public String getModelName() {
         return modelName;
     }
+    
+    public int getMakeId() {
+        return makeId;
+    }
 
     public void setModelId(int modelId) {
         this.modelId = modelId;
@@ -35,12 +41,17 @@ public class Model {
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
+    
+    public void setMakeId(int makeId) {
+        this.makeId = makeId;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 97 * hash + this.modelId;
         hash = 97 * hash + Objects.hashCode(this.modelName);
+        hash = 97 * hash + this.makeId;
         return hash;
     }
 
@@ -59,10 +70,15 @@ public class Model {
         if (this.modelId != other.modelId) {
             return false;
         }
+        if (this.makeId != other.makeId) {
+            return false;
+        }
         if (!Objects.equals(this.modelName, other.modelName)) {
             return false;
         }
         return true;
     }
+
+    
     
 }

@@ -5,10 +5,17 @@
  */
 package com.mthree.HurtzCarRentalsBackend.dao;
 
+import com.mthree.HurtzCarRentalsBackend.entity.Category;
+import java.util.List;
+
 /**
  *
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public interface CategoryDao {
-    
+    public Category getCategoryById(int categoryId);
+    public List<Category> getAllCategories();
+    public Category addCategory(Category c); 
+    public void updateCategory(Category c);
+    public void deleteCategoryById(int categoryId);     
 }
