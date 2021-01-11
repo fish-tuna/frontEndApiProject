@@ -20,3 +20,4 @@ public interface ModelDao {
     public void deleteModelById(int modelId);   
    
 }
+

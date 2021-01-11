@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 @Repository
 public class VehicleDaoImpl implements VehicleDao {
@@ -49,9 +49,30 @@ public class VehicleDaoImpl implements VehicleDao {
         final String SELECT_ALL_VEHICLES = "SELECT * FROM Vehicle";
         return jdbc.query(SELECT_ALL_VEHICLES, new VehicleMapper());
     }
-
+    
     @Override
-    public List<Vehicle> getAllAvailableVehiclesOnDate(Date startDate, Date endDate) {
+    public List<Vehicle> getAllAvailableVehiclesBetween(Date startDate, Date endDate) {
+        /*
+        reference: bool overlap = a.start < b.end && b.start < a.end;
+        
+        sd, ed = start_date, end_date on sql server, respectively.
+        (i.e. startDate is the startDate in this function's arguments, whereas sd is the one in the db that we're comparing to)
+        
+        overlappingReservations = get all reservations that have sd < endDate and startDate < ed
+            select * where 
+                startDate < ed and
+                sd < endDate
+        
+        overlappingPlates = getLicensePlates(overlappingReservations);
+
+        vehicles vs = get all vehicles
+        find all vehicles v not in overlappingPlates
+        */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
