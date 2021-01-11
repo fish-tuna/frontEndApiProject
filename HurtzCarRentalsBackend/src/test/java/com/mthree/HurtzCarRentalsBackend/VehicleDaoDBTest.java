@@ -5,11 +5,15 @@
  */
 package com.mthree.HurtzCarRentalsBackend;
 
+
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -40,6 +44,14 @@ public class VehicleDaoDBTest {
         v.setCategoryId(0);
         v.setModelId(0);
         return v;
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
     }
     
     @BeforeEach
@@ -76,5 +88,8 @@ public class VehicleDaoDBTest {
         assertEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
         assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
                         vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
+    }
+    @After
+    public void tearDown() {
     }
 }
