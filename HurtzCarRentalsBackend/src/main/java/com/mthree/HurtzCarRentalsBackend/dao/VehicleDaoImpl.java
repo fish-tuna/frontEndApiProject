@@ -51,6 +51,13 @@ public class VehicleDaoImpl implements VehicleDao {
 
     @Override
     public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
+        /*
+        overlappingReservations = get all reservations that have startDates after startDate and/or endDates before endDate
+        overlappingPlates = getLicensePlates(overlappingReservations);
+
+        vehicles vs = get all vehicles
+        find all vehicles v not in overlappingPlates
+        */
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
