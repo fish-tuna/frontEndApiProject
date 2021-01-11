@@ -13,8 +13,9 @@ import java.util.List;
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public interface CustomerDao {
-    public Customer addCustomer(Customer c);
-    public boolean deleteCustomer(int customerId);
-    public Customer getCustomer(int customerId);
+    public Customer getCustomerById(int customerId);
     public List<Customer> getAllCustomers();
+    public Customer addCustomer(Customer c);
+    public void updateCustomer(Customer c);
+    public void deleteCustomerById(int customerId);  
 }
