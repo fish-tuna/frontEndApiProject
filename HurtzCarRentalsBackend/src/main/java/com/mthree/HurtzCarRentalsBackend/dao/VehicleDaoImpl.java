@@ -15,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -72,7 +73,6 @@ public class VehicleDaoImpl implements VehicleDao {
     
     @Override
     public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
-        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -101,11 +101,12 @@ public class VehicleDaoImpl implements VehicleDao {
     
 
     @Override
+    @Transactional
     public void deleteVehicleByLicensePlate(String licensePlate) {
         final String DELETE_RESERVATION = "DELETE FROM Reservation WHERE licensePlate = ?";
         jdbc.update(DELETE_RESERVATION, licensePlate);
         
-        final String DELETE_VEHICLE = "DELETE FROM Customer WHERE customerId = ?";
+        final String DELETE_VEHICLE = "DELETE FROM Vehicle WHERE licensePlate = ?";
         jdbc.update(DELETE_VEHICLE, licensePlate);
     }
     

@@ -13,8 +13,9 @@ import java.util.List;
  * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public interface ReservationDao {
-    public Reservation addReservation(Reservation r);
-    public void deleteReservation(int reservationId);
-    public Reservation getReservation(int reservationId);
+    public Reservation getReservationById(int reservationId);
     public List<Reservation> getAllReservations();
+    public Reservation addReservation(Reservation r);
+    public void updateReservation(Reservation r);
+    public void deleteReservationById(int reservationId);
 }

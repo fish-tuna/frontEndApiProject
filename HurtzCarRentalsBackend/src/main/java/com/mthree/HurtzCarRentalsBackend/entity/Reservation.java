@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley bennett.c.foley@gmail.com
+ * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
 public class Reservation {
     
@@ -22,9 +22,7 @@ public class Reservation {
     double beforeTax;
     double tax;
     double discount;
-    double totalPrice;
-
-    
+    double totalPrice;    
 
     public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
         this.reservationId = reservationId;
@@ -38,12 +36,77 @@ public class Reservation {
         this.totalPrice = totalPrice;
     }
 
+       
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
+    }
+
+    public void setCustomerLicenseNumber(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setBeforeTax(double beforeTax) {
+        this.beforeTax = beforeTax;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
     public int getReservationId() {
         return reservationId;
     }
     
     public int getCustomerId() {
         return customerId;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public double getBeforeTax() {
+        return beforeTax;
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     @Override
@@ -102,69 +165,5 @@ public class Reservation {
         }
         return true;
     }
-
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
-    }
-
-    public void setCustomerLicenseNumber(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setBeforeTax(double beforeTax) {
-        this.beforeTax = beforeTax;
-    }
-
-    public void setTax(double tax) {
-        this.tax = tax;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public double getBeforeTax() {
-        return beforeTax;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
+    
 }
