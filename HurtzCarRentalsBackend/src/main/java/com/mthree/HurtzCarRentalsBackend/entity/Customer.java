@@ -19,6 +19,10 @@ public class Customer {
     Date dob;
     String licenseNumber;
     int loyaltyPts;
+    
+    public Customer() {
+        
+    }
 
     public Customer(int customerId, String firstName, String lastName, Date dob, String licenseNumber, int loyaltyPts) {
         this.customerId = customerId;
