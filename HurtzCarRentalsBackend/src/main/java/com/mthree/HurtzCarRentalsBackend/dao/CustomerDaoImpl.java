@@ -29,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public Customer getCustomerById(int customerId) {
         try {
-            final String GET_CUSTOMER_BY_ID = "SELECT * FROM Customer WHERE id = ?";
+            final String GET_CUSTOMER_BY_ID = "SELECT * FROM Customer WHERE customerId = ?";
             return jdbc.queryForObject(GET_CUSTOMER_BY_ID, new CustomerMapper(), customerId);
         } catch(DataAccessException ex) {
             return null;
