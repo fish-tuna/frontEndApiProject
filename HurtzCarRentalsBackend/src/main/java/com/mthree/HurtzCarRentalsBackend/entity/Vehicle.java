@@ -16,7 +16,12 @@ public class Vehicle {
     int categoryId;
     int modelId; 
     String color;
-
+    
+    
+    public Vehicle() {
+        
+    }
+    
     public Vehicle(String licensePlate, int categoryId, int modelId, String color) {
         this.licensePlate = licensePlate;
         this.categoryId = categoryId;
