@@ -52,7 +52,15 @@ public class VehicleDaoImpl implements VehicleDao {
     @Override
     public List<Vehicle> getAllAvailableVehiclesBetween(Date startDate, Date endDate) {
         /*
+        reference: bool overlap = a.start < b.end && b.start < a.end;
+        
+        sd, ed = start_date, end_date on sql server, respectively.
+        (i.e. startDate is the startDate in this function's arguments, whereas sd is the one in the db that we're comparing to)
         overlappingReservations = get all reservations that have startDates after startDate and/or endDates before endDate
+            select * where 
+                startDate < ed and
+                sd < endDate
+        
         overlappingPlates = getLicensePlates(overlappingReservations);
 
         vehicles vs = get all vehicles
