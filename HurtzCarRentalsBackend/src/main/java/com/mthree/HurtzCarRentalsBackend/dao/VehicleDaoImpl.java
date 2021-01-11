@@ -48,9 +48,9 @@ public class VehicleDaoImpl implements VehicleDao {
         final String SELECT_ALL_VEHICLES = "SELECT * FROM Vehicle";
         return jdbc.query(SELECT_ALL_VEHICLES, new VehicleMapper());
     }
-
+    
     @Override
-    public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
+    public List<Vehicle> getAllAvailableVehiclesBetween(Date startDate, Date endDate) {
         /*
         overlappingReservations = get all reservations that have startDates after startDate and/or endDates before endDate
         overlappingPlates = getLicensePlates(overlappingReservations);
@@ -58,6 +58,12 @@ public class VehicleDaoImpl implements VehicleDao {
         vehicles vs = get all vehicles
         find all vehicles v not in overlappingPlates
         */
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
