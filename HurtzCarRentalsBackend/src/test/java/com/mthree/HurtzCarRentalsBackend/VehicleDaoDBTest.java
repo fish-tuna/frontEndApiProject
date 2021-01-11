@@ -9,6 +9,7 @@ import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -24,11 +25,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class VehicleDaoDBTest {
+    
     @Autowired
     VehicleDao vehicleDao;
     
     public VehicleDaoDBTest() {
         
+    }
+    
+    private Vehicle getStandardVehicle() {
+        Vehicle v = new Vehicle();
+        v.setLicensePlate("GO-BEARS");
+        v.setColor("blue");
+        v.setCategoryId(0);
+        v.setModelId(0);
+        return v;
     }
     
     @BeforeEach
@@ -42,17 +53,28 @@ public class VehicleDaoDBTest {
     @Test
     public void testAddVehicle() {
         
-        Vehicle v = new Vehicle();
-        v.setLicensePlate("GO-BEARS");
-        v.setColor("blue");
-        v.setCategoryId(0);
-        v.setModelId(0);
+        Vehicle v = getStandardVehicle();
         
         vehicleDao.addVehicle(v);
         
         Vehicle v1 = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
         assertEquals(v, v1);
+    }
+    
+    @Test
+    public void testUpdateVehicle() {
+        Vehicle v = getStandardVehicle();
+        vehicleDao.addVehicle(v);
+        Vehicle v1 = getStandardVehicle();
+        v1.setLicensePlate("GO-BUFFALO");
+        vehicleDao.addVehicle(v1);
         
+        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "red"));
         
+        assertNotEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
+        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "blue"));
+        assertEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
+        assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
+                        vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
     }
 }
