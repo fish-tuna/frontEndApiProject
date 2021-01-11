@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -94,6 +95,34 @@ public class CustomerDaoDBTest {
         assertNull(fromDao);
         
         
+    }
+    
+    @Test
+    public void testUpdateCustomerById() {
+        Customer customer = new Customer();
+        customer.setFirstName("Test Customer First");
+        customer.setLastName("Test Customer Last");
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(1985,1,8);
+        customer.setDob(cal.getTime());
+        
+        customer.setLicenseNumber("S-001-2033");
+        customer.setLoyaltyPts(0);
+                
+        customer = customerDao.addCustomer(customer);
+        
+        Customer fromDao = customerDao.getCustomerById(customer.getCustomerId());
+        assertEquals(customer, fromDao);
+        
+        customer.setFirstName("New Test First");
+        customerDao.updateCustomer(customer);
+        
+        assertNotEquals(customer, fromDao);
+        
+        fromDao = customerDao.getCustomerById(customer.getCustomerId());
+        
+        assertEquals(customer, fromDao);
     }
     
 }
