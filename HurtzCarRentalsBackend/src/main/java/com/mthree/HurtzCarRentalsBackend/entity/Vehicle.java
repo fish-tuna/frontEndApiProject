@@ -9,14 +9,19 @@ import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Vehicle {
     String licensePlate; //primary key
     int categoryId;
     int modelId; 
     String color;
-
+    
+    
+    public Vehicle() {
+        
+    }
+    
     public Vehicle(String licensePlate, int categoryId, int modelId, String color) {
         this.licensePlate = licensePlate;
         this.categoryId = categoryId;

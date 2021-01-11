@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Customer {
     int customerId;
@@ -19,6 +19,10 @@ public class Customer {
     Date dob;
     String licenseNumber;
     int loyaltyPts;
+    
+    public Customer() {
+        
+    }
 
     public Customer(int customerId, String firstName, String lastName, Date dob, String licenseNumber, int loyaltyPts) {
         this.customerId = customerId;

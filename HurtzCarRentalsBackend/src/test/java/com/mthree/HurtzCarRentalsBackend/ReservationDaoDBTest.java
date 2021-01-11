@@ -5,15 +5,17 @@
  */
 package com.mthree.HurtzCarRentalsBackend;
 
-
-import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ *
+ * @author Bennett Foley bennett.c.foley@gmail.com
+ */
+
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class HurtzCarRentalsBackendApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
+public class ReservationDaoDBTest {
+    
 }

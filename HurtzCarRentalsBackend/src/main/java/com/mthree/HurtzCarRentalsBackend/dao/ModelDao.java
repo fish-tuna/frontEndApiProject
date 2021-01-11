@@ -7,7 +7,7 @@ package com.mthree.HurtzCarRentalsBackend.dao;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public interface ModelDao {
     
