@@ -8,7 +8,7 @@ function Add() {
     <div>
       <Segment.Group>
         <Header as="h1" block textAlign="center">
-          Search and Edit
+          Add
         </Header>
         <Grid columns={3}>
           <Grid.Column textAlign="center">
