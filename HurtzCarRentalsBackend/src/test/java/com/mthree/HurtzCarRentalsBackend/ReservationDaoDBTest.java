@@ -7,11 +7,14 @@ package com.mthree.HurtzCarRentalsBackend;
 
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.dao.ReservationDao;
+import com.mthree.HurtzCarRentalsBackend.entity.Customer;
 import com.mthree.HurtzCarRentalsBackend.entity.Reservation;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.Calendar;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,16 @@ public class ReservationDaoDBTest {
     
     @Autowired
     ReservationDao reservationDao;
+    
+    @Before
+    public void setUp() {
+        
+        List<Reservation> reservations = reservationDao.getAllReservations();
+        for(Reservation reservation : reservations) {
+            reservationDao.deleteReservationById(reservation.getReservationId());
+        }
+
+    }
     
     @Test
     public void testAddReservation() {
