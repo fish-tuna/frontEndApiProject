@@ -47,8 +47,8 @@ public class CustomerDaoImpl implements CustomerDao {
     public Customer addCustomer(Customer c) {  
         
         //loyalty points are 0 by default
-        final String INSERT_CUSTOMER = "INSERT INTO Customer(firstName, "
-                + "lastName, dob, licenseNumber, loyaltyPts) VALUES(?,?,?,?,0)";
+        final String INSERT_CUSTOMER = "INSERT INTO Customer(" 
+                + "firstName, lastName, dateOfBirth, licenseNumber, loyaltyPoints) VALUES(?,?,?,?,?)";
         jdbc.update(INSERT_CUSTOMER, c.getFirstName(), c.getLastName(), c.getDob(),
                 c.getLicenseNumber(), 0);
         
@@ -60,7 +60,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void updateCustomer(Customer c) {
         final String UPDATE_CUSTOMER = "UPDATE Customer SET firstName = ?, lastName = ?, " +
-                "dob = ?, licenseNumber = ?, loyaltyPts = ? WHERE id = ?";
+                "dateOfBirth = ?, licenseNumber = ?, loyaltyPoints = ? WHERE id = ?";
         jdbc.update(UPDATE_CUSTOMER,
                 c.getFirstName(),
                 c.getLastName(),
