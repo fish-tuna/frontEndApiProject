@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -90,6 +91,26 @@ public class VehicleDaoDBTest {
         assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
                         vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
     }
+    
+    @Test
+    public void testDeleteVehicleByLicensePlate() {
+        
+        Vehicle vehicle = getStandardVehicle();
+        vehicle.setLicensePlate("3L78V9");
+        vehicleDao.addVehicle(vehicle);
+                
+        vehicle = vehicleDao.addVehicle(vehicle);
+        
+        Vehicle fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
+        assertEquals(vehicle, fromDao);
+        
+        vehicleDao.deleteVehicleByLicensePlate(vehicle.getLicensePlate());
+        
+        fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
+        assertNull(fromDao);
+            
+    }
+    
     @After
     public void tearDown() {
     }
