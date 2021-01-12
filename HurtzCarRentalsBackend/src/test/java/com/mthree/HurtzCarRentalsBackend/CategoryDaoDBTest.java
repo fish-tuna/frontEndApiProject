@@ -8,6 +8,7 @@ package com.mthree.HurtzCarRentalsBackend;
 import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Category;
 import java.util.List;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -43,6 +44,8 @@ public class CategoryDaoDBTest {
         categoryDao.addCategory(c);
         c = new Category(1, "Luxury", 125);
         categoryDao.addCategory(c);
+        Category c1 = categoryDao.getCategoryById(0);
+        assertNotEquals(c, c1);
     }
     
 }

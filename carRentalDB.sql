@@ -11,7 +11,7 @@ CREATE TABLE Model (
   modelId INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
   modelName VARCHAR(45) NOT NULL,
   makeId INT NOT NULL,
-FOREIGN KEY fk_makeId(makeId) REFERENCES Make(makeId));
+FOREIGN KEY fk_makeId(makeId) REFERENCES Make(makeId) ON DELETE CASCADE);
 
 CREATE TABLE Category (
   categoryId INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
@@ -23,7 +23,7 @@ CREATE TABLE Vehicle (
   categoryId INT NOT NULL,
   modelId INT NOT NULL,
   color VARCHAR(45) NOT NULL,
-  FOREIGN KEY fk_categoryId(categoryId) REFERENCES Category(categoryId));  
+  FOREIGN KEY fk_categoryId(categoryId) REFERENCES Category(categoryId) ON DELETE CASCADE);  
 
 CREATE TABLE Customer (
   customerId INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
@@ -43,6 +43,6 @@ CREATE TABLE Reservation (
   discount DECIMAL NOT NULL,
   tax DECIMAL NOT NULL,
   totalPrice DECIMAL NOT NULL,
-  FOREIGN KEY fk_customerId(customerId) REFERENCES Customer(customerId),
-  FOREIGN KEY fk_licensePlate(licensePlate) REFERENCES Vehicle(licensePlate));
+  FOREIGN KEY fk_customerId(customerId) REFERENCES Customer(customerId) ON DELETE CASCADE,
+  FOREIGN KEY fk_licensePlate(licensePlate) REFERENCES Vehicle(licensePlate) ON DELETE CASCADE);
 
