@@ -5,6 +5,9 @@
  */
 package com.mthree.HurtzCarRentalsBackend;
 
+import com.mthree.HurtzCarRentalsBackend.entity.Category;
+import com.mthree.HurtzCarRentalsBackend.entity.Make;
+import com.mthree.HurtzCarRentalsBackend.entity.Model;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 
 /**
@@ -19,5 +22,17 @@ public class TestUtil {
         v.setCategoryId(0);
         v.setModelId(0);
         return v;
+    }
+    
+    public static Make getStandardMake() {
+        return new Make(0, "Chevy");
+    }
+    
+    public static Model getStandardModel() {
+        return new Model(0, "Malibu", 0);
+    }
+    
+    public static Category getStandardCategory() {
+        return new Category(0, "Sedan", 75);
     }
 }

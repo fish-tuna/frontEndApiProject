@@ -6,7 +6,12 @@
 package com.mthree.HurtzCarRentalsBackend;
 
 
+import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
+import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
+import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
+import com.mthree.HurtzCarRentalsBackend.entity.Category;
+import com.mthree.HurtzCarRentalsBackend.entity.Model;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.List;
 import org.junit.After;
@@ -34,6 +39,12 @@ public class VehicleDaoDBTest {
     
     @Autowired
     VehicleDao vehicleDao;
+    @Autowired
+    ModelDao modelDao;
+    @Autowired
+    MakeDao makeDao;
+    @Autowired
+    CategoryDao categoryDao;
     
     public VehicleDaoDBTest() {
         
@@ -49,12 +60,14 @@ public class VehicleDaoDBTest {
     public static void tearDownClass() {
     }
     
-    @Before
+    @BeforeEach
     public void setUp() {
         List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         for (Vehicle v : vehicles) {
             vehicleDao.deleteVehicleByLicensePlate(v.getLicensePlate());
         }
+        Category sedan = TestUtil.getStandardCategory();
+        categoryDao.addCategory(sedan);
     }
     
     @Test

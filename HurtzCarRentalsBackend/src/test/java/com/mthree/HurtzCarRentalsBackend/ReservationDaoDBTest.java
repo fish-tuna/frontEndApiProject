@@ -36,6 +36,8 @@ public class ReservationDaoDBTest {
     @Autowired
     VehicleDao vehicleDao;
     
+    @Autowired
+    
     @Before
     public void setUp() {
         
