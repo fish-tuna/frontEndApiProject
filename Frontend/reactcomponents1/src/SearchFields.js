@@ -26,6 +26,7 @@ function SearchFields(props) {
   const [dateBanner, toggleDateBanner] = useState(false);
   //conditional display of search results component
   const [searchResults, setSearchResults] = useState(null);
+  //should the prevent defaults below be eliminated by detaching the buttons from the forms? Or will the default behavior not affect anything (is the preventDefault necessary?)?
   //handle customer submit button
   const handleCustomerSearch = (e) => {
     if (
@@ -39,6 +40,7 @@ function SearchFields(props) {
       e.preventDefault();
       toggleBanner(true);
     } else {
+      e.preventDefault();
       toggleBanner(false);
       fetch("http://localhost:8080/customers/find", {
         method: "POST",
@@ -67,6 +69,7 @@ function SearchFields(props) {
       e.preventDefault();
       toggleBanner(true);
     } else {
+      e.preventDefault();
       toggleBanner(false);
       fetch("http://localhost:8080/vehicles/find", {
         method: "POST",
@@ -103,6 +106,7 @@ function SearchFields(props) {
       e.preventDefault();
       toggleDateBanner(true);
     } else {
+      e.preventDefault();
       toggleBanner(false);
       toggleDateBanner(false);
       fetch("http://localhost:8080/reservations/find", {
@@ -192,7 +196,6 @@ function SearchFields(props) {
           <Button type="submit" onClick={handleInventorySearch}>
             Submit
           </Button>
-          <Button onClick={console.log(category)}></Button>
         </Form>
       </div>
     );

@@ -30,6 +30,14 @@ function ConditionalBanner(props) {
           </Message>
         </div>
       );
+    } else if (props.type === "success") {
+      return (
+        <div>
+          <Message positive>
+            <Message.Header>Success!</Message.Header>
+          </Message>
+        </div>
+      );
     }
   }
 }
