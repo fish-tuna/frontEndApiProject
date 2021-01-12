@@ -46,7 +46,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Transactional
     public Category addCategory(Category c) {
         final String INSERT_CATEGORY = "INSERT INTO Category("
-                + "categoryName, categoryPrice VALUES(?,?)";
+                + "categoryName, categoryPrice) VALUES(?,?)";
         jdbc.update(INSERT_CATEGORY, 
                 c.getCategoryName(),
                 c.getCategoryPrice());
