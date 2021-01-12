@@ -33,6 +33,9 @@ public class ReservationDaoDBTest {
     @Autowired
     ReservationDao reservationDao;
     
+    @Autowired
+    VehicleDao vehicleDao;
+    
     @Before
     public void setUp() {
         
@@ -40,7 +43,7 @@ public class ReservationDaoDBTest {
         for(Reservation reservation : reservations) {
             reservationDao.deleteReservationById(reservation.getReservationId());
         }
-
+        vehicleDao.addVehicle(TestUtil.getStandardVehicle());
     }
     
     @Test
@@ -51,6 +54,7 @@ public class ReservationDaoDBTest {
         reservation.setDiscount(0.00);
         reservation.setReservationId(294);
         reservation.setTax(3.00);
+        reservation.setLicensePlate("GO-BEARS");
         
         Calendar startDate = Calendar.getInstance();
         startDate.set(2021,2,1);

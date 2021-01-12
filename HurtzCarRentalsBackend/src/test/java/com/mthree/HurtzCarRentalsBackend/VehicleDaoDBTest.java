@@ -39,14 +39,7 @@ public class VehicleDaoDBTest {
         
     }
     
-    private Vehicle getStandardVehicle() {
-        Vehicle v = new Vehicle();
-        v.setLicensePlate("GO-BEARS");
-        v.setColor("blue");
-        v.setCategoryId(0);
-        v.setModelId(0);
-        return v;
-    }
+    
     
     @BeforeClass
     public static void setUpClass() {
@@ -67,7 +60,7 @@ public class VehicleDaoDBTest {
     @Test
     public void testAddVehicle() {
         
-        Vehicle v = getStandardVehicle();
+        Vehicle v = TestUtil.getStandardVehicle();
         
         vehicleDao.addVehicle(v);
         
@@ -77,9 +70,9 @@ public class VehicleDaoDBTest {
     
     @Test
     public void testUpdateVehicle() {
-        Vehicle v = getStandardVehicle();
+        Vehicle v = TestUtil.getStandardVehicle();
         vehicleDao.addVehicle(v);
-        Vehicle v1 = getStandardVehicle();
+        Vehicle v1 = TestUtil.getStandardVehicle();
         v1.setLicensePlate("GO-BUFFALO");
         vehicleDao.addVehicle(v1);
         
@@ -95,7 +88,7 @@ public class VehicleDaoDBTest {
     @Test
     public void testDeleteVehicleByLicensePlate() {
         
-        Vehicle vehicle = getStandardVehicle();
+        Vehicle vehicle = TestUtil.getStandardVehicle();
         vehicle.setLicensePlate("3L78V9");
         vehicle.setColor("red");
         vehicleDao.addVehicle(vehicle);
