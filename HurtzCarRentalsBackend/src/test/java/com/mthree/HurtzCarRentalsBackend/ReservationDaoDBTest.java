@@ -54,7 +54,7 @@ public class ReservationDaoDBTest {
     }
     
     @Test
-    public void testDeleteVehicleByLicensePlate() {
+    public void testDeleteReservation() {
         
         Reservation reservation = new Reservation();
         reservation.setBeforeTax(1.00);
@@ -80,6 +80,37 @@ public class ReservationDaoDBTest {
         
         fromDao = reservationDao.getReservationById(reservation.getReservationId());
         assertNull(fromDao);
+            
+    }
+    
+    @Test
+    public void testUpdateReservation() {
+        
+        Reservation reservation = new Reservation();
+        reservation.setBeforeTax(1.00);
+        reservation.setCustomerLicenseNumber(33982);
+        reservation.setDiscount(0.00);
+        reservation.setReservationId(294);
+        reservation.setTax(3.00);
+        
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(2021,2,1);
+        reservation.setStartDate(startDate.getTime());
+        
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2021,2,5);
+        reservation.setEndDate(endDate.getTime());
+        
+        reservationDao.addReservation(reservation);
+        
+        Reservation fromDao = reservationDao.getReservationById(reservation.getReservationId());
+        assertEquals(reservation, fromDao);
+        
+        reservation.setDiscount(-50.00);
+        reservationDao.updateReservation(reservation);
+        
+        fromDao = reservationDao.getReservationById(reservation.getReservationId());
+        assertEquals(reservation, fromDao);
             
     }
     
