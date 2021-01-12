@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Bennett Foley <bennett.c.foley@gmail.com>
  */
+@Repository
 public class ReservationDaoImpl implements ReservationDao {
 
     @Autowired
@@ -44,8 +46,8 @@ public class ReservationDaoImpl implements ReservationDao {
     @Transactional
     public Reservation addReservation(Reservation r) {
         final String INSERT_RESERVATION = "INSERT INTO Reservation("
-                + "customerId, licensePlate, startDate, endDate,"
-                + "beforeTax, tax, discount, totalPrice) VALUES(?,?,?,?,?,?,?,?)";
+                + "customerId, licensePlate, startDate, endDate, "
+                + "beforeTaxPrice, tax, discount, totalPrice) VALUES(?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_RESERVATION, 
                 r.getCustomerId(),
                 r.getLicensePlate(),
@@ -65,7 +67,7 @@ public class ReservationDaoImpl implements ReservationDao {
     public void updateReservation(Reservation r) {
         final String UPDATE_RESERVATION = "UPDATE Reservation SET customerId = ?, "
                 + "licensePlate = ?, startDate = ?, endDate = ?,"
-                + "beforeTax = ?, tax = ?, discount = ?, totalPrice = ? WHERE reservationId = ?";
+                + "beforeTaxPrice = ?, tax = ?, discount = ?, totalPrice = ? WHERE reservationId = ?";
         jdbc.update(UPDATE_RESERVATION,
                 r.getCustomerId(),
                 r.getLicensePlate(),
