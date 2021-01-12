@@ -22,6 +22,8 @@ function SearchFields(props) {
   const endDate = useRef(null);
   //error banner status
   const [banner, toggleBanner] = useState(false);
+  //bad date format banner
+  const [dateBanner, toggleDateBanner] = useState(false);
   //conditional display of search results component
   const [searchResults, setSearchResults] = useState(null);
   //handle customer submit button
@@ -92,8 +94,17 @@ function SearchFields(props) {
     ) {
       e.preventDefault();
       toggleBanner(true);
+    } else if (
+      !(
+        startDate.current.value.match(/^\d{2}\/{1}\d{2}\/{1}\d{2}$/) &&
+        endDate.current.value.match(/^\d{2}\/{1}\d{2}\/{1}\d{2}$/)
+      )
+    ) {
+      e.preventDefault();
+      toggleDateBanner(true);
     } else {
       toggleBanner(false);
+      toggleDateBanner(false);
       fetch("http://localhost:8080/reservations/find", {
         method: "POST",
         body: JSON.stringify({
@@ -110,18 +121,19 @@ function SearchFields(props) {
   };
 
   //conditional rendering
-  if (props.field == undefined) {
+  if (props.field === undefined) {
     return <div></div>;
   } else if (searchResults) {
     return (
       <div>
+        <Button onClick={() => setSearchResults(false)}>New Search</Button>
         <SearchResults results={searchResults} type={props.field} />
       </div>
     );
-  } else if (props.field == "customer") {
+  } else if (props.field === "customer") {
     return (
       <div>
-        <ConditionalBanner displayBool={banner} />
+        <ConditionalBanner displayBool={banner} type={"field"} />
         <Form>
           <Form.Field>
             <label>Customer ID</label>
@@ -146,10 +158,10 @@ function SearchFields(props) {
         </Form>
       </div>
     );
-  } else if (props.field == "inventory") {
+  } else if (props.field === "inventory") {
     return (
       <div>
-        <ConditionalBanner display={banner} />
+        <ConditionalBanner display={banner} type={"field"} />
         <Form>
           <Form.Field>
             <label>Category</label>
@@ -184,10 +196,11 @@ function SearchFields(props) {
         </Form>
       </div>
     );
-  } else if (props.field == "reservation") {
+  } else if (props.field === "reservation") {
     return (
       <div>
-        <ConditionalBanner display={banner} />
+        <ConditionalBanner display={banner} type={"field"} />
+        <ConditionalBanner display={dateBanner} type={"date"} />
         <Form>
           <Form.Field>
             <label>Vehicle License Number</label>

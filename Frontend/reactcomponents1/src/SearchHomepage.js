@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { Form, Button, Segment, Grid, Header } from "semantic-ui-react";
+import { useState } from "react";
+import { Button, Segment, Grid, Header } from "semantic-ui-react";
 import SearchFields from "./SearchFields";
-
 function SearchHomepage() {
   //conditional display, use buttons to set state
   const [window, setWindow] = useState(null);
