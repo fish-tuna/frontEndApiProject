@@ -23,6 +23,9 @@ public class Reservation {
     double tax;
     double discount;
     double totalPrice;    
+    
+    public Reservation() {
+    }
 
     public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
         this.reservationId = reservationId;

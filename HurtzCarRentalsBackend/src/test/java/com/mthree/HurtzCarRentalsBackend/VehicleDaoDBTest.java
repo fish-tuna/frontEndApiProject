@@ -97,6 +97,7 @@ public class VehicleDaoDBTest {
         
         Vehicle vehicle = getStandardVehicle();
         vehicle.setLicensePlate("3L78V9");
+        vehicle.setColor("red");
         vehicleDao.addVehicle(vehicle);
                 
         vehicle = vehicleDao.addVehicle(vehicle);
