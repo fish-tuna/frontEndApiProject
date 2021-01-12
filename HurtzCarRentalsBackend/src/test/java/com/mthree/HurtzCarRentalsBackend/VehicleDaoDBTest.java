@@ -5,11 +5,17 @@
  */
 package com.mthree.HurtzCarRentalsBackend;
 
+
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -42,7 +48,15 @@ public class VehicleDaoDBTest {
         return v;
     }
     
-    @BeforeEach
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
     public void setUp() {
         List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         for (Vehicle v : vehicles) {
@@ -76,5 +90,29 @@ public class VehicleDaoDBTest {
         assertEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
         assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
                         vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
+    }
+    
+    @Test
+    public void testDeleteVehicleByLicensePlate() {
+        
+        Vehicle vehicle = getStandardVehicle();
+        vehicle.setLicensePlate("3L78V9");
+        vehicle.setColor("red");
+        vehicleDao.addVehicle(vehicle);
+                
+        vehicle = vehicleDao.addVehicle(vehicle);
+        
+        Vehicle fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
+        assertEquals(vehicle, fromDao);
+        
+        vehicleDao.deleteVehicleByLicensePlate(vehicle.getLicensePlate());
+        
+        fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
+        assertNull(fromDao);
+            
+    }
+    
+    @After
+    public void tearDown() {
     }
 }
