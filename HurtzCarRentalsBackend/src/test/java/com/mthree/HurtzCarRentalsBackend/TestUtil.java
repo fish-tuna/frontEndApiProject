@@ -19,20 +19,20 @@ public class TestUtil {
         Vehicle v = new Vehicle();
         v.setLicensePlate("GO-BEARS");
         v.setColor("blue");
-        v.setCategoryId(0);
-        v.setModelId(0);
+        v.setCategoryId(1);
+        v.setModelId(1);
         return v;
     }
     
     public static Make getStandardMake() {
-        return new Make(0, "Chevy");
+        return new Make(1, "Chevy");
     }
     
     public static Model getStandardModel() {
-        return new Model(0, "Malibu", 0);
+        return new Model(1, "Malibu", 0);
     }
     
     public static Category getStandardCategory() {
-        return new Category(0, "Sedan", 75);
+        return new Category(1, "Sedan", 75);
     }
 }

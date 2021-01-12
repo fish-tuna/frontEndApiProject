@@ -68,8 +68,6 @@ public class VehicleDaoDBTest {
         }
         Category sedan = TestUtil.getStandardCategory();
         categoryDao.addCategory(sedan);
-        Vehicle v = TestUtil.getStandardVehicle();
-        vehicleDao.addVehicle(v);
     }
     
     @Test
