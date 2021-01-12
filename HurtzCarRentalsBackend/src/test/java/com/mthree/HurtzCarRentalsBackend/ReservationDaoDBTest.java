@@ -32,7 +32,7 @@ public class ReservationDaoDBTest {
     public void testAddReservation() {
         Reservation reservation = new Reservation();
         reservation.setBeforeTax(1.00);
-        reservation.setCustomerLicenseNumber("S239581");
+        reservation.setCustomerLicenseNumber(33982);
         reservation.setDiscount(0.00);
         reservation.setReservationId(294);
         reservation.setTax(3.00);
