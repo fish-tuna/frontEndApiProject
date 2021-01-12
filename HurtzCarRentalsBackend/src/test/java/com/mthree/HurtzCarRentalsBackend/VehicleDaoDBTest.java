@@ -66,12 +66,20 @@ public class VehicleDaoDBTest {
         for (Vehicle v : vehicles) {
             vehicleDao.deleteVehicleByLicensePlate(v.getLicensePlate());
         }
-        Category sedan = TestUtil.getStandardCategory();
-        categoryDao.addCategory(sedan);
+        List<Category> categories = categoryDao.getAllCategories();
+        for (Category c : categories) {
+            categoryDao.deleteCategoryById(c.getCategoryId());
+        }
+//        Category sedan = TestUtil.getStandardCategory();
+//        categoryDao.addCategory(sedan);
+//        categoryDao.addCategory(new Category(2, "Luxury", 125));
     }
     
     @Test
     public void testAddVehicle() {
+        Category sedan = TestUtil.getStandardCategory();
+        categoryDao.addCategory(sedan);
+        categoryDao.addCategory(new Category(2, "Luxury", 125));
         
         Vehicle v = TestUtil.getStandardVehicle();
         
