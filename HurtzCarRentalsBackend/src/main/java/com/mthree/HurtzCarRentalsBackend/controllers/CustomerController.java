@@ -49,16 +49,14 @@ public class CustomerController {
     //UPDATE CUSTOMER
     @PutMapping("/customers/{customerId}")
     Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable int customerId) {
- 
-        return customerDao.getCustomerById(customerId).map(customer -> {
-            customer.setFirstName(newCustomer.getFirstName());
-            customer.setLastName(newCustomer.getLastName());
-            customer.setDob(newCustomer.getDob());
-            customer.setLicenseNumber(newCustomer.getLicenseNumber());
-            customer.setLoyaltyPts(newCustomer.getLoyaltyPts());
-            return customerDao.updateCustomer(customer);
-
-        });
+        Customer old = customerDao.getCustomerById(customerId);
+        old.setFirstName(newCustomer.getFirstName());
+        old.setLastName(newCustomer.getLastName());
+        old.setDob(newCustomer.getDob());
+        old.setLicenseNumber(newCustomer.getLicenseNumber());
+        old.setLoyaltyPts(newCustomer.getLoyaltyPts());
+        customerDao.updateCustomer(old);
+        return old;
     }
 
     //DELETE CUSTOMER
