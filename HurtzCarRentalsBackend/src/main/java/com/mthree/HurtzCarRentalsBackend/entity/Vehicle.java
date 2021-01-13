@@ -21,6 +21,11 @@ public class Vehicle {
     public Vehicle() {
         
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" + "licensePlate=" + licensePlate + ", categoryId=" + categoryId + ", modelId=" + modelId + ", color=" + color + '}';
+    }
     
     public Vehicle(String licensePlate, int categoryId, int modelId, String color) {
         this.licensePlate = licensePlate;

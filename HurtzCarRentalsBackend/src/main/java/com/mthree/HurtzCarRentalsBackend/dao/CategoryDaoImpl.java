@@ -35,7 +35,13 @@ public class CategoryDaoImpl implements CategoryDao {
             return null;
         }
     }
-
+    
+    @Override
+    public Category getCategoryByName(String categoryName) {
+        final String GET_CATEGORY_BY_NAME = "SELECT * FROM Category WHERE categoryName = ?";
+        return jdbc.queryForObject(GET_CATEGORY_BY_NAME, new CategoryMapper(), categoryName);
+    }
+    
     @Override
     public List<Category> getAllCategories() {
         final String SELECT_ALL_CATEGORIES = "SELECT * FROM Category";

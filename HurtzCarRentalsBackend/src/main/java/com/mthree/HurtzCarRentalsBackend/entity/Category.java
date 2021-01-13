@@ -21,6 +21,11 @@ public class Category {
         this.categoryName = categoryName;
         this.categoryPrice = categoryPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" + "categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryPrice=" + categoryPrice + '}';
+    }
     
     public Category(String categoryName, double categoryPrice) {
         this.categoryName = categoryName;

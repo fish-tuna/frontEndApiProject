@@ -35,6 +35,12 @@ public class MakeDaoImpl implements MakeDao{
             return null;
         }
     }
+    
+    @Override
+    public Make getMakeByName(String makeName) {
+        final String GET_MAKE_BY_NAME = "SELECT * FROM Make WHERE makeName = ?";
+        return jdbc.queryForObject(GET_MAKE_BY_NAME, new MakeMapper(), makeName);
+    }
 
     @Override
     public List<Make> getAllMakes() {

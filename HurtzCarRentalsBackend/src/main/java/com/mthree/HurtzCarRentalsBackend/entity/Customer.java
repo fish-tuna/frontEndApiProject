@@ -24,6 +24,11 @@ public class Customer {
         
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" + "customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", licenseNumber=" + licenseNumber + ", loyaltyPts=" + loyaltyPts + '}';
+    }
+
     public Customer(int customerId, String firstName, String lastName, Date dob, String licenseNumber, int loyaltyPts) {
         this.customerId = customerId;
         this.firstName = firstName;

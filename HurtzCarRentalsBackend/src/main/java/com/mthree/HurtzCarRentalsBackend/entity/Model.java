@@ -22,6 +22,11 @@ public class Model {
         this.makeId = makeId;
     }
 
+    @Override
+    public String toString() {
+        return "Model{" + "modelId=" + modelId + ", modelName=" + modelName + ", makeId=" + makeId + '}';
+    }
+
     public int getModelId() {
         return modelId;
     }

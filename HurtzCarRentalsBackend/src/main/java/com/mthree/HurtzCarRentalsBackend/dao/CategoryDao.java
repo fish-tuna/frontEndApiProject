@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface CategoryDao {
     public Category getCategoryById(int categoryId);
+    public Category getCategoryByName(String categoryName);
     public List<Category> getAllCategories();
     public Category addCategory(Category c); 
     public void updateCategory(Category c);

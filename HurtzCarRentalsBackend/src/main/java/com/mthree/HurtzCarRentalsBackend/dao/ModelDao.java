@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ModelDao {
     public Model getModelById(int modelId);
+    public Model getModelByName(String modelName);
     public List<Model> getAllModels();
     public Model addModel(Model m); 
     public void updateModel(Model m);

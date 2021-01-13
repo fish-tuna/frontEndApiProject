@@ -27,6 +27,11 @@ public class Reservation {
     public Reservation() {
     }
 
+    @Override
+    public String toString() {
+        return "Reservation{" + "reservationId=" + reservationId + ", customerId=" + customerId + ", licensePlate=" + licensePlate + ", startDate=" + startDate + ", endDate=" + endDate + ", beforeTax=" + beforeTax + ", tax=" + tax + ", discount=" + discount + ", totalPrice=" + totalPrice + '}';
+    }
+
     public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
         this.reservationId = reservationId;
         this.customerId = customerId;

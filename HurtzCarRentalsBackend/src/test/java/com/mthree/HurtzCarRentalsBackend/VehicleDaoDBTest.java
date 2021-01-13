@@ -65,80 +65,82 @@ public class VehicleDaoDBTest {
     public void setUp() {
         List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println("deleting vehicle: " + vehicles.get(i).getLicensePlate());
             vehicleDao.deleteVehicleByLicensePlate(vehicles.get(i).getLicensePlate());
         }
         List<Category> categories = categoryDao.getAllCategories();
         for (Category c : categories) {
-            System.out.println("category");
             categoryDao.deleteCategoryById(c.getCategoryId());
         }
         List<Model> models = modelDao.getAllModels();
         for (Model m : models) {
-            System.out.println("model");
             modelDao.deleteModelById(m.getModelId());
         }
         List<Make> makes = makeDao.getAllMakes();
         for (Make m : makes) {
-            System.out.println("make");
             makeDao.deleteMakeById(m.getMakeId());
         }
+        
+        TestUtil.setupSubarus(categoryDao, makeDao, modelDao);
         
 //        Category sedan = TestUtil.getStandardCategory();
 //        categoryDao.addCategory(sedan);
 //        categoryDao.addCategory(new Category(2, "Luxury", 125));
     }
     
+    public Vehicle makeBearsVehicle() {
+        Category sedan = categoryDao.getCategoryByName("Sedan");
+        Model m = modelDao.getModelByName("Crosstrek");
+        return vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan.getCategoryId(), m.getModelId(), "blue"));
+    }
+    
+    public Vehicle makeMyVehicle() {
+        return vehicleDao.addVehicle(
+                new Vehicle("BENNETT", 
+                            categoryDao.getCategoryByName("Sedan").getCategoryId(), 
+                            modelDao.getModelByName("Outback").getModelId(),
+                            "red"));
+    }
+    
     @Test
     public void testAddVehicle() {
-        Category sedan = categoryDao.addCategory(new Category("Sedan", 75));
-        Category luxury = categoryDao.addCategory(new Category("Luxury", 125));
-        Make make = makeDao.addMake(new Make(0, "Subaru"));
-        Model model1 = modelDao.addModel(new Model(0, "Crosstrek", make.getMakeId()));
-//                TestUtil.getStandardCategory();
-//        categoryDao.addCategory(sedan);
-//        categoryDao.addCategory(new Category(2, "Luxury", 125));
         
-        Vehicle v = vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan.getCategoryId(), model1.getModelId(), "blue"));
+        
+        Category sedan = categoryDao.getCategoryByName("Sedan");
+        Model m = modelDao.getModelByName("Crosstrek");
+        Vehicle v = makeBearsVehicle();
         
         Vehicle v1 = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
         assertEquals(v, v1);
+        Vehicle v2 = makeMyVehicle();
+        assertNotEquals(v1, v2);
     }
     
     @Test
     public void testUpdateVehicle() {
-//        Vehicle v = TestUtil.getStandardVehicle();
-//        vehicleDao.addVehicle(v);
-//        Vehicle v1 = TestUtil.getStandardVehicle();
-//        v1.setLicensePlate("GO-BUFFALO");
-//        vehicleDao.addVehicle(v1);
-//        
-//        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "red"));
-//        
-//        assertNotEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
-//        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "blue"));
-//        assertEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
-//        assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
-//                        vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
+        
+        Vehicle bears = makeBearsVehicle();
+        Vehicle mine = makeMyVehicle();
+        Vehicle oldMine = vehicleDao.getVehicleByLicensePlate(mine.getLicensePlate());
+        mine.setColor("black");
+        vehicleDao.updateVehicle(mine);
+        System.out.println("mine: " + mine.toString());
+        System.out.println("olde: " + oldMine.toString());
+        assertNotEquals(oldMine, mine);
+        vehicleDao.updateVehicle(mine);
+        Vehicle newMine = vehicleDao.getVehicleByLicensePlate(mine.getLicensePlate());
+        assertEquals(mine, newMine);
+        assertNotEquals(newMine, oldMine);
     }
     
     @Test
     public void testDeleteVehicleByLicensePlate() {
-        
-//        Vehicle vehicle = TestUtil.getStandardVehicle();
-//        vehicle.setLicensePlate("3L78V9");
-//        vehicle.setColor("red");
-//        vehicleDao.addVehicle(vehicle);
-//                
-//        vehicle = vehicleDao.addVehicle(vehicle);
-//        
-//        Vehicle fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
-//        assertEquals(vehicle, fromDao);
-//        
-//        vehicleDao.deleteVehicleByLicensePlate(vehicle.getLicensePlate());
-//        
-//        fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
-//        assertNull(fromDao);
+        Vehicle bears = makeBearsVehicle();
+        Vehicle mine = makeMyVehicle();
+        vehicleDao.deleteVehicleByLicensePlate("BENNETT");
+        Vehicle nothing = vehicleDao.getVehicleByLicensePlate("BENNETT");
+        assertEquals(nothing, null);
+        Vehicle something = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
+        assertEquals(something, bears);
             
     }
     

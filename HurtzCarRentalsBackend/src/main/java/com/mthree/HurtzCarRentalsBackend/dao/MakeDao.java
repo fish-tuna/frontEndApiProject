@@ -15,6 +15,7 @@ import java.util.List;
  */
 public interface MakeDao {
     public Make getMakeById(int makeId);
+    public Make getMakeByName(String makeName);
     public List<Make> getAllMakes();
     public Make addMake(Make m); 
     public void updateMake(Make m);

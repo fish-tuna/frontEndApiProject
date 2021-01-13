@@ -18,6 +18,11 @@ public class Make {
         this.makeName = makeName;
     }
 
+    @Override
+    public String toString() {
+        return "Make{" + "makeId=" + makeId + ", makeName=" + makeName + '}';
+    }
+
     public int getMakeId() {
         return makeId;
     }
