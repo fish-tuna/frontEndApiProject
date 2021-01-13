@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author kmill
  */
+@Repository
 public class ModelDaoImpl implements ModelDao{
     
     @Autowired
@@ -33,6 +35,12 @@ public class ModelDaoImpl implements ModelDao{
             return null;
         }
     }
+    
+    @Override
+    public Model getModelByName(String modelName) {
+        final String GET_MODEL_BY_NAME = "SELECT * FROM Model WHERE modelName = ?";
+        return jdbc.queryForObject(GET_MODEL_BY_NAME, new ModelMapper(), modelName);
+    }
 
     @Override
     public List<Model> getAllModels() {
@@ -44,7 +52,7 @@ public class ModelDaoImpl implements ModelDao{
     @Transactional
     public Model addModel(Model c) {
         final String INSERT_MODEL = "INSERT INTO Model("
-                + "modelName, makeId VALUES(?,?)";
+                + "modelName, makeId) VALUES(?,?)";
         jdbc.update(INSERT_MODEL, 
                 c.getModelName(),
                 c.getMakeId());

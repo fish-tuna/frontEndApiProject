@@ -5,12 +5,13 @@
  */
 package com.mthree.HurtzCarRentalsBackend.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Reservation {
     
@@ -25,6 +26,11 @@ public class Reservation {
     double totalPrice;    
     
     public Reservation() {
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "reservationId=" + reservationId + ", customerId=" + customerId + ", licensePlate=" + licensePlate + ", startDate=" + startDate + ", endDate=" + endDate + ", beforeTax=" + beforeTax + ", tax=" + tax + ", discount=" + discount + ", totalPrice=" + totalPrice + '}';
     }
 
     public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
@@ -44,7 +50,7 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public void setCustomerLicenseNumber(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -160,10 +166,23 @@ public class Reservation {
         if (!Objects.equals(this.licensePlate, other.licensePlate)) {
             return false;
         }
-        if (!Objects.equals(this.startDate, other.startDate)) {
+        
+        //Same day approximation
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(this.startDate);
+        cal2.setTime(other.startDate);
+        boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                          cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+        
+        if (!sameDay) {
             return false;
         }
-        if (!Objects.equals(this.endDate, other.endDate)) {
+        cal1.setTime(this.endDate);
+        cal2.setTime(other.endDate);
+        sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                          cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+        if (!sameDay) {
             return false;
         }
         return true;

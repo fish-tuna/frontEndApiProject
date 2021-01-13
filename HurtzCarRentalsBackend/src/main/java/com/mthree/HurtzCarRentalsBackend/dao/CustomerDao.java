@@ -7,11 +7,13 @@ package com.mthree.HurtzCarRentalsBackend.dao;
 
 import com.mthree.HurtzCarRentalsBackend.entity.Customer;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Bennett Foley bennett.c.foley@gmail.com
  */
+@Repository
 public interface CustomerDao {
     public Customer getCustomerById(int customerId);
     public List<Customer> getAllCustomers();

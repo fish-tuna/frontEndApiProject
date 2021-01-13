@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author kmill
  */
+@Repository
 public class CategoryDaoImpl implements CategoryDao {
     
     @Autowired
@@ -33,7 +35,13 @@ public class CategoryDaoImpl implements CategoryDao {
             return null;
         }
     }
-
+    
+    @Override
+    public Category getCategoryByName(String categoryName) {
+        final String GET_CATEGORY_BY_NAME = "SELECT * FROM Category WHERE categoryName = ?";
+        return jdbc.queryForObject(GET_CATEGORY_BY_NAME, new CategoryMapper(), categoryName);
+    }
+    
     @Override
     public List<Category> getAllCategories() {
         final String SELECT_ALL_CATEGORIES = "SELECT * FROM Category";
@@ -44,7 +52,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Transactional
     public Category addCategory(Category c) {
         final String INSERT_CATEGORY = "INSERT INTO Category("
-                + "categoryName, categoryPrice VALUES(?,?)";
+                + "categoryName, categoryPrice) VALUES(?,?)";
         jdbc.update(INSERT_CATEGORY, 
                 c.getCategoryName(),
                 c.getCategoryPrice());

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Bennett Foley <bennett.c.foley@gmail.com>
+ * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class Model {
     int modelId;
@@ -20,6 +20,11 @@ public class Model {
         this.modelId = modelId;
         this.modelName = modelName;
         this.makeId = makeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" + "modelId=" + modelId + ", modelName=" + modelName + ", makeId=" + makeId + '}';
     }
 
     public int getModelId() {

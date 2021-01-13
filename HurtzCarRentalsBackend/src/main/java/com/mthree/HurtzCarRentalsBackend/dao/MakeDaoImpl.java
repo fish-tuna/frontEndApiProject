@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author kmill
  */
+@Repository
 public class MakeDaoImpl implements MakeDao{
         
     @Autowired
@@ -33,6 +35,12 @@ public class MakeDaoImpl implements MakeDao{
             return null;
         }
     }
+    
+    @Override
+    public Make getMakeByName(String makeName) {
+        final String GET_MAKE_BY_NAME = "SELECT * FROM Make WHERE makeName = ?";
+        return jdbc.queryForObject(GET_MAKE_BY_NAME, new MakeMapper(), makeName);
+    }
 
     @Override
     public List<Make> getAllMakes() {
@@ -44,7 +52,7 @@ public class MakeDaoImpl implements MakeDao{
     @Transactional
     public Make addMake(Make m) {
         final String INSERT_MAKE = "INSERT INTO Make("
-                + "makeName VALUES(?)";
+                + "makeName) VALUES(?)";
         jdbc.update(INSERT_MAKE, 
                 m.getMakeName());
         

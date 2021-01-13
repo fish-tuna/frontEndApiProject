@@ -42,12 +42,7 @@ public class CustomerDaoDBTest {
     
     @Before
     public void setUp() {
-        
-        List<Customer> customers = customerDao.getAllCustomers();
-        for(Customer customer : customers) {
-            customerDao.deleteCustomerById(customer.getCustomerId());
-        }
-
+        TestUtil.clearAllCustomers(customerDao);
     }
     
     @Test

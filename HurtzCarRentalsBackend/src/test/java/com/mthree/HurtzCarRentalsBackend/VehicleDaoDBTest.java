@@ -6,7 +6,13 @@
 package com.mthree.HurtzCarRentalsBackend;
 
 
+import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
+import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
+import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
+import com.mthree.HurtzCarRentalsBackend.entity.Category;
+import com.mthree.HurtzCarRentalsBackend.entity.Make;
+import com.mthree.HurtzCarRentalsBackend.entity.Model;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.List;
 import org.junit.After;
@@ -17,6 +23,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +41,12 @@ public class VehicleDaoDBTest {
     
     @Autowired
     VehicleDao vehicleDao;
+    @Autowired
+    ModelDao modelDao;
+    @Autowired
+    MakeDao makeDao;
+    @Autowired
+    CategoryDao categoryDao;
     
     public VehicleDaoDBTest() {
         
@@ -51,58 +64,50 @@ public class VehicleDaoDBTest {
     
     @Before
     public void setUp() {
-        List<Vehicle> vehicles = vehicleDao.getAllVehicles();
-        for (Vehicle v : vehicles) {
-            vehicleDao.deleteVehicleByLicensePlate(v.getLicensePlate());
-        }
+        TestUtil.clearAll(categoryDao, makeDao, modelDao, vehicleDao);
+        
+        
+        TestUtil.setupSubarus(categoryDao, makeDao, modelDao);
+        
     }
+    
+    
     
     @Test
     public void testAddVehicle() {
         
-        Vehicle v = TestUtil.getStandardVehicle();
-        
-        vehicleDao.addVehicle(v);
+        Vehicle v = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
         
         Vehicle v1 = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
         assertEquals(v, v1);
+        Vehicle v2 = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        assertNotEquals(v1, v2);
     }
     
     @Test
     public void testUpdateVehicle() {
-        Vehicle v = TestUtil.getStandardVehicle();
-        vehicleDao.addVehicle(v);
-        Vehicle v1 = TestUtil.getStandardVehicle();
-        v1.setLicensePlate("GO-BUFFALO");
-        vehicleDao.addVehicle(v1);
         
-        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "red"));
-        
-        assertNotEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
-        vehicleDao.updateVehicle(new Vehicle("GO-BEARS", 0, 0, "blue"));
-        assertEquals(v, vehicleDao.getVehicleByLicensePlate("GO-BEARS"));
-        assertNotEquals(vehicleDao.getVehicleByLicensePlate("GO-BEARS"), 
-                        vehicleDao.getVehicleByLicensePlate("GO-BUFFALO"));
+        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle oldMine = vehicleDao.getVehicleByLicensePlate(mine.getLicensePlate());
+        mine.setColor("black");
+        vehicleDao.updateVehicle(mine);
+        assertNotEquals(oldMine, mine);
+        vehicleDao.updateVehicle(mine);
+        Vehicle newMine = vehicleDao.getVehicleByLicensePlate(mine.getLicensePlate());
+        assertEquals(mine, newMine);
+        assertNotEquals(newMine, oldMine);
     }
     
     @Test
     public void testDeleteVehicleByLicensePlate() {
-        
-        Vehicle vehicle = TestUtil.getStandardVehicle();
-        vehicle.setLicensePlate("3L78V9");
-        vehicle.setColor("red");
-        vehicleDao.addVehicle(vehicle);
-                
-        vehicle = vehicleDao.addVehicle(vehicle);
-        
-        Vehicle fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
-        assertEquals(vehicle, fromDao);
-        
-        vehicleDao.deleteVehicleByLicensePlate(vehicle.getLicensePlate());
-        
-        fromDao = vehicleDao.getVehicleByLicensePlate(vehicle.getLicensePlate());
-        assertNull(fromDao);
-            
+        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        vehicleDao.deleteVehicleByLicensePlate("BENNETT");
+        Vehicle nothing = vehicleDao.getVehicleByLicensePlate("BENNETT");
+        assertEquals(nothing, null);
+        Vehicle something = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
+        assertEquals(something, bears);
     }
     
     @After

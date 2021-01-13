@@ -5,6 +5,10 @@
  */
 package com.mthree.HurtzCarRentalsBackend;
 
+import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
+import com.mthree.HurtzCarRentalsBackend.dao.CustomerDao;
+import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
+import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.dao.ReservationDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Customer;
@@ -36,21 +40,32 @@ public class ReservationDaoDBTest {
     @Autowired
     VehicleDao vehicleDao;
     
+    @Autowired
+    CustomerDao customerDao;
+    
+    @Autowired
+    CategoryDao categoryDao;
+    
+    @Autowired
+    MakeDao makeDao;
+    
+    @Autowired
+    ModelDao modelDao;
+    
     @Before
     public void setUp() {
-        
-        List<Reservation> reservations = reservationDao.getAllReservations();
-        for(Reservation reservation : reservations) {
-            reservationDao.deleteReservationById(reservation.getReservationId());
-        }
-        vehicleDao.addVehicle(TestUtil.getStandardVehicle());
+        TestUtil.clearAll(categoryDao, makeDao, modelDao, vehicleDao, reservationDao, customerDao);
+        TestUtil.setupSubarus(categoryDao, makeDao, modelDao);
+        TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
     }
     
     @Test
     public void testAddReservation() {
         Reservation reservation = new Reservation();
+        Customer first = TestUtil.makeFirstCustomer(customerDao);
+        
         reservation.setBeforeTax(1.00);
-        reservation.setCustomerLicenseNumber(33982);
+        reservation.setCustomerId(first.getCustomerId());
         reservation.setDiscount(0.00);
         reservation.setReservationId(294);
         reservation.setTax(3.00);
@@ -74,11 +89,13 @@ public class ReservationDaoDBTest {
     public void testDeleteReservation() {
         
         Reservation reservation = new Reservation();
+        Customer first = TestUtil.makeFirstCustomer(customerDao);
         reservation.setBeforeTax(1.00);
-        reservation.setCustomerLicenseNumber(33982);
+        reservation.setCustomerId(first.getCustomerId());
         reservation.setDiscount(0.00);
         reservation.setReservationId(294);
         reservation.setTax(3.00);
+        reservation.setLicensePlate("GO-BEARS");
         
         Calendar startDate = Calendar.getInstance();
         startDate.set(2021,2,1);
@@ -104,11 +121,13 @@ public class ReservationDaoDBTest {
     public void testUpdateReservation() {
         
         Reservation reservation = new Reservation();
+        Customer first = TestUtil.makeFirstCustomer(customerDao);
         reservation.setBeforeTax(1.00);
-        reservation.setCustomerLicenseNumber(33982);
+        reservation.setCustomerId(first.getCustomerId());
         reservation.setDiscount(0.00);
         reservation.setReservationId(294);
         reservation.setTax(3.00);
+        reservation.setLicensePlate("GO-BEARS");
         
         Calendar startDate = Calendar.getInstance();
         startDate.set(2021,2,1);
