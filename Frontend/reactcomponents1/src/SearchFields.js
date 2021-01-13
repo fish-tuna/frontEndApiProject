@@ -125,7 +125,7 @@ function SearchFields(props) {
   };
 
   //conditional rendering
-  if (props.field === undefined) {
+  if (props.field === null) {
     return <div></div>;
   } else if (searchResults) {
     return (

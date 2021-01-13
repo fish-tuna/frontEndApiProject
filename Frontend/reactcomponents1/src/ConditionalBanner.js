@@ -3,7 +3,9 @@ import { Message } from "semantic-ui-react";
 function ConditionalBanner(props) {
   if (!props.displayBool) {
     return <div></div>;
-  } else {
+  }
+  //props can be used instead of hardcoding all these messages
+  else {
     if (props.type === "field") {
       return (
         <div>

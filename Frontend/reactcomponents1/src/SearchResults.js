@@ -63,7 +63,9 @@ function SearchResults(props) {
         />
       </div>
     );
-  } else if (props.type === "customer") {
+  }
+  //these three code blocks below should not be hardcoded- a single component can render all of them with different props
+  else if (props.type === "customer") {
     return (
       <div>
         <Table celled padded>
