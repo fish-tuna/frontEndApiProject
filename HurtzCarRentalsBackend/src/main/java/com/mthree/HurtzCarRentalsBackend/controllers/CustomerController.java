@@ -5,24 +5,17 @@
  */
 package com.mthree.HurtzCarRentalsBackend.controllers;
 
-import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
 import com.mthree.HurtzCarRentalsBackend.dao.CustomerDao;
-import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
-import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
-import com.mthree.HurtzCarRentalsBackend.dao.ReservationDao;
-import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Customer;
-import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  *
@@ -30,24 +23,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
  */
 @RestController
 public class CustomerController {
-    
-    @Autowired
-    CategoryDao categoryDao;
-    
+
     @Autowired
     CustomerDao customerDao;
     
-    @Autowired
-    MakeDao makeDao;
-    
-    @Autowired
-    ModelDao modelDao;
-    
-    @Autowired
-    ReservationDao reservationDao;
-    
-    @Autowired
-    VehicleDao vehicleDao;
     
     //GET ALL CUSTOMERS
     @GetMapping(value = "/customers")
@@ -61,19 +40,31 @@ public class CustomerController {
         return customerDao.getCustomerById(customerId);
     }
 
+    //ADD CUSTOMER
     @PostMapping("/customers")
-    public ResponseEntity<Object> createStudent(@RequestBody Customer customer) {
-     //????????
+    Customer addCustomer(@RequestBody Customer newCustomer) {
+        return customerDao.addCustomer(newCustomer);
+    }
+    
+    //UPDATE CUSTOMER
+    @PutMapping("/customers/{customerId}")
+    Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable int customerId) {
+ 
+        return customerDao.getCustomerById(customerId).map(customer -> {
+            customer.setFirstName(newCustomer.getFirstName());
+            customer.setLastName(newCustomer.getLastName());
+            customer.setDob(newCustomer.getDob());
+            customer.setLicenseNumber(newCustomer.getLicenseNumber());
+            customer.setLoyaltyPts(newCustomer.getLoyaltyPts());
+            return customerDao.updateCustomer(customer);
 
+        });
     }
 
+    //DELETE CUSTOMER
     @DeleteMapping("/customers/{customerId}")
     public void deleteCustomer(@PathVariable int customerId) {
         customerDao.deleteCustomerById(customerId);
     }
-    
-    
-            
-            
-    
+  
 }
