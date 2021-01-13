@@ -33,11 +33,7 @@ public class CategoryDaoDBTest {
     
     @Before
     public void setup() {
-        List<Category> categories = categoryDao.getAllCategories();
-        for (int i = 0; i < categories.size(); i++) {
-            System.out.println("cat: " + categories.get(i).getCategoryName());
-            categoryDao.deleteCategoryById(categories.get(i).getCategoryId());
-        }
+        TestUtil.clearAllCategories(categoryDao);
     }
     
     @Test

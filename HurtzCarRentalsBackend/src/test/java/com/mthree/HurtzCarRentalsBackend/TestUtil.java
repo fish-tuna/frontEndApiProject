@@ -6,10 +6,12 @@
 package com.mthree.HurtzCarRentalsBackend;
 
 import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
+import com.mthree.HurtzCarRentalsBackend.dao.CustomerDao;
 import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
 import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Category;
+import com.mthree.HurtzCarRentalsBackend.entity.Customer;
 import com.mthree.HurtzCarRentalsBackend.entity.Make;
 import com.mthree.HurtzCarRentalsBackend.entity.Model;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
@@ -84,6 +86,13 @@ public class TestUtil {
         List<Make> makes = makeDao.getAllMakes();
         for (Make m : makes) {
             makeDao.deleteMakeById(m.getMakeId());
+        }
+    }
+    
+    public static void clearAllCustomers(CustomerDao customerDao) {
+        List<Customer> customers = customerDao.getAllCustomers();
+        for (Customer c : customers) { 
+            customerDao.deleteCustomerById(c.getCustomerId());
         }
     }
     

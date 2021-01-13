@@ -5,6 +5,7 @@
  */
 package com.mthree.HurtzCarRentalsBackend.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -125,7 +126,16 @@ public class Customer {
         if (!Objects.equals(this.licenseNumber, other.licenseNumber)) {
             return false;
         }
-        if (!Objects.equals(this.dob, other.dob)) {
+        //Same day approximation
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(this.dob);
+        cal2.setTime(other.dob);
+        boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                          cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+        if (!sameDay) {
+            
+            
             return false;
         }
         return true;

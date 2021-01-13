@@ -76,7 +76,6 @@ public class VehicleDaoDBTest {
     @Test
     public void testAddVehicle() {
         
-        
         Vehicle v = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
         
         Vehicle v1 = vehicleDao.getVehicleByLicensePlate("GO-BEARS");

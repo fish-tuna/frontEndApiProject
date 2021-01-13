@@ -60,7 +60,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void updateCustomer(Customer c) {
         final String UPDATE_CUSTOMER = "UPDATE Customer SET firstName = ?, lastName = ?, " +
-                "dateOfBirth = ?, licenseNumber = ?, loyaltyPoints = ? WHERE id = ?";
+                "dateOfBirth = ?, licenseNumber = ?, loyaltyPoints = ? WHERE customerId = ?";
         jdbc.update(UPDATE_CUSTOMER,
                 c.getFirstName(),
                 c.getLastName(),
