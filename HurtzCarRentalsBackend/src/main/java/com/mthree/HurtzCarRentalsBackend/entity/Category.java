@@ -21,6 +21,11 @@ public class Category {
         this.categoryName = categoryName;
         this.categoryPrice = categoryPrice;
     }
+    
+    public Category(String categoryName, double categoryPrice) {
+        this.categoryName = categoryName;
+        this.categoryPrice = categoryPrice;
+    }
 
     public int getCategoryId() {
         return categoryId;

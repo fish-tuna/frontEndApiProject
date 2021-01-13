@@ -38,9 +38,9 @@ public class VehicleController {
         return vehicleDao.getVehicleByLicensePlate(vehicleLicensePlate);
     }
     
-    //GET VEHICLES ON DATE
+    //GET VEHICLES ON DATE (calls between dates on the same date twice)
     
-    //GET VEHICLES BETWEEN DATES
+    //GET VEHICLES BETWEEN DATES INCLUSIVE
 
     //ADD VEHICLE
     @PostMapping("/vehicles")

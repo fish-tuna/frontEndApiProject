@@ -46,7 +46,7 @@ public class MakeDaoImpl implements MakeDao{
     @Transactional
     public Make addMake(Make m) {
         final String INSERT_MAKE = "INSERT INTO Make("
-                + "makeName VALUES(?)";
+                + "makeName) VALUES(?)";
         jdbc.update(INSERT_MAKE, 
                 m.getMakeName());
         

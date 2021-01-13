@@ -46,7 +46,7 @@ public class ModelDaoImpl implements ModelDao{
     @Transactional
     public Model addModel(Model c) {
         final String INSERT_MODEL = "INSERT INTO Model("
-                + "modelName, makeId VALUES(?,?)";
+                + "modelName, makeId) VALUES(?,?)";
         jdbc.update(INSERT_MODEL, 
                 c.getModelName(),
                 c.getMakeId());
