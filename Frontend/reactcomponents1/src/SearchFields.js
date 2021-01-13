@@ -165,7 +165,7 @@ function SearchFields(props) {
   } else if (props.field === "inventory") {
     return (
       <div>
-        <ConditionalBanner display={banner} type={"field"} />
+        <ConditionalBanner displayBool={banner} type={"field"} />
         <Form>
           <Form.Field>
             <label>Category</label>
@@ -202,8 +202,8 @@ function SearchFields(props) {
   } else if (props.field === "reservation") {
     return (
       <div>
-        <ConditionalBanner display={banner} type={"field"} />
-        <ConditionalBanner display={dateBanner} type={"date"} />
+        <ConditionalBanner displayBool={banner} type={"field"} />
+        <ConditionalBanner displayBool={dateBanner} type={"date"} />
         <Form>
           <Form.Field>
             <label>Vehicle License Number</label>
