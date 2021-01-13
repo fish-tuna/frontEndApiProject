@@ -9,12 +9,15 @@ import com.mthree.HurtzCarRentalsBackend.dao.CategoryDao;
 import com.mthree.HurtzCarRentalsBackend.dao.CustomerDao;
 import com.mthree.HurtzCarRentalsBackend.dao.MakeDao;
 import com.mthree.HurtzCarRentalsBackend.dao.ModelDao;
+import com.mthree.HurtzCarRentalsBackend.dao.ReservationDao;
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Category;
 import com.mthree.HurtzCarRentalsBackend.entity.Customer;
 import com.mthree.HurtzCarRentalsBackend.entity.Make;
 import com.mthree.HurtzCarRentalsBackend.entity.Model;
+import com.mthree.HurtzCarRentalsBackend.entity.Reservation;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -22,14 +25,7 @@ import java.util.List;
  * @author Bennett Foley bennett.c.foley@gmail.com
  */
 public class TestUtil {
-    public static Vehicle getStandardVehicle() {
-        Vehicle v = new Vehicle();
-        v.setLicensePlate("GO-BEARS");
-        v.setColor("blue");
-        v.setCategoryId(1);
-        v.setModelId(1);
-        return v;
-    }
+    
     
     public static void clearAll(CategoryDao categoryDao, MakeDao makeDao, ModelDao modelDao, VehicleDao vehicleDao) {
         
@@ -37,6 +33,12 @@ public class TestUtil {
         TestUtil.clearAllCategories(categoryDao);
         TestUtil.clearAllModels(modelDao);
         TestUtil.clearAllMakes(makeDao);
+    }
+    
+    public static void clearAll(CategoryDao categoryDao, MakeDao makeDao, ModelDao modelDao, VehicleDao vehicleDao, ReservationDao reservationDao, CustomerDao customerDao) {
+        clearAll(categoryDao, makeDao, modelDao, vehicleDao);
+        clearAllReservations(reservationDao);
+        clearAllCustomers(customerDao);
     }
     
     public static void setupSubarus(CategoryDao categoryDao, MakeDao makeDao, ModelDao modelDao) {
@@ -59,6 +61,12 @@ public class TestUtil {
                             categoryDao.getCategoryByName("Sedan").getCategoryId(), 
                             modelDao.getModelByName("Outback").getModelId(),
                             "red"));
+    }
+    
+    public static Customer makeFirstCustomer(CustomerDao customerDao) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(1996,8,14);
+        return customerDao.addCustomer(new Customer(0, "Bennett", "Foley", cal.getTime(), "1234", 0));
     }
     
     public static void clearAllVehicles(VehicleDao vehicleDao) {
@@ -93,6 +101,13 @@ public class TestUtil {
         List<Customer> customers = customerDao.getAllCustomers();
         for (Customer c : customers) { 
             customerDao.deleteCustomerById(c.getCustomerId());
+        }
+    }
+    
+    public static void clearAllReservations(ReservationDao reservationDao) {
+        List<Reservation> reservations = reservationDao.getAllReservations();
+        for (Reservation r : reservations) {
+            reservationDao.deleteReservationById(r.getReservationId());
         }
     }
     
