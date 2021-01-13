@@ -57,7 +57,7 @@ public class VehicleController {
     Vehicle updateVehicle(@RequestBody Vehicle newVehicle, @PathVariable String vehicleLicensePlate) {
         Vehicle old = vehicleDao.getVehicleByLicensePlate(vehicleLicensePlate);
         old.setCategoryId(newVehicle.getCategoryId());
-        old.setModelId(newVehicle.getModelId());
+        old.setModelId(newVehicle.getModelId(), newVehicle.getModelName(), newVehicle.getMakeName());
         old.setColor(newVehicle.getColor());
         vehicleDao.updateVehicle(old);
         return old;

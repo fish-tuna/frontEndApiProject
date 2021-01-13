@@ -71,24 +71,28 @@ public class VehicleDaoImpl implements VehicleDao {
 
     @Override
     public Vehicle addVehicle(Vehicle v) {
-        final String INSERT_VEHICLE = "INSERT INTO Vehicle(licensePlate, categoryId, modelId, color) "
-                + "VALUES(?,?,?,?)";
+        final String INSERT_VEHICLE = "INSERT INTO Vehicle(licensePlate, categoryId, modelId, color, modelName, makeName) "
+                + "VALUES(?,?,?,?,?,?)";
         jdbc.update(INSERT_VEHICLE,
                 v.getLicensePlate(),
                 v.getCategoryId(),
                 v.getModelId(),
-                v.getColor());
+                v.getColor(),
+                v.getModelName(),
+                v.getMakeName());
         return v;
     }
 
     @Override
     public void updateVehicle(Vehicle v) {
         final String UPDATE_VEHICLE = "UPDATE Vehicle SET categoryId = ?, "
-                + "modelId = ?, color = ? WHERE licensePlate = ?";
+                + "modelId = ?, color = ?, makeName = ?, modelName = ? WHERE licensePlate = ?";
         jdbc.update(UPDATE_VEHICLE,
                 v.getCategoryId(),
                 v.getModelId(),
                 v.getColor(),
+                v.getModelName(),
+                v.getMakeName(),
                 v.getLicensePlate());
     }
     
@@ -110,7 +114,9 @@ public class VehicleDaoImpl implements VehicleDao {
             Vehicle v = new Vehicle(rs.getString("licensePlate"),
                                     rs.getInt("categoryId"), 
                                     rs.getInt("modelId"),
-                                    rs.getString("color"));
+                                    rs.getString("color"),
+                                    rs.getString("makeName"),
+                                    rs.getString("modelName"));
             return v;
         }
     }

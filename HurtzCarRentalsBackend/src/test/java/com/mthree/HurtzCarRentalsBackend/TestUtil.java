@@ -52,7 +52,7 @@ public class TestUtil {
     public static Vehicle makeBearsVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao) {
         Category sedan = categoryDao.getCategoryByName("Sedan");
         Model m = modelDao.getModelByName("Crosstrek");
-        return vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan.getCategoryId(), m.getModelId(), "blue"));
+        return vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan.getCategoryId(), m.getModelId(), "blue", "Crosstrek", "Subaru"));
     }
     
     public static Vehicle makeMyVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao) {
@@ -60,7 +60,9 @@ public class TestUtil {
                 new Vehicle("BENNETT", 
                             categoryDao.getCategoryByName("Sedan").getCategoryId(), 
                             modelDao.getModelByName("Outback").getModelId(),
-                            "red"));
+                            "red",
+                            "Outback",
+                            "Subaru"));
     }
     
     public static Customer makeFirstCustomer(CustomerDao customerDao) {

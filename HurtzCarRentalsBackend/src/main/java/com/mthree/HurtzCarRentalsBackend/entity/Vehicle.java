@@ -15,6 +15,8 @@ public class Vehicle {
     String licensePlate; //primary key
     int categoryId;
     int modelId; 
+    String modelName = "default";
+    String makeName = "default";
     String color;
     
     
@@ -27,7 +29,7 @@ public class Vehicle {
         return "Vehicle{" + "licensePlate=" + licensePlate + ", categoryId=" + categoryId + ", modelId=" + modelId + ", color=" + color + '}';
     }
     
-    public Vehicle(String licensePlate, int categoryId, int modelId, String color) {
+    public Vehicle(String licensePlate, int categoryId, int modelId, String color, String modelName, String makeName) {
         this.licensePlate = licensePlate;
         this.categoryId = categoryId;
         this.modelId = modelId;
@@ -60,8 +62,18 @@ public class Vehicle {
         this.categoryId = categoryId;
     }
 
-    public void setModelId(int modelId) {
+    public void setModelId(int modelId, String modelName, String makeName) {
+        this.modelName = modelName;
+        this.makeName = makeName;
         this.modelId = modelId;
+    }
+    
+    public String getMakeName() {
+        return makeName;
+    }
+    
+    public String getModelName() {
+        return modelName;
     }
 
     public void setColor(String color) {

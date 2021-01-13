@@ -23,6 +23,8 @@ CREATE TABLE Vehicle (
   categoryId INT NOT NULL,
   modelId INT NOT NULL,
   color VARCHAR(45) NOT NULL,
+  modelName VARCHAR(45) NOT NULL,
+  makeName VARCHAR(45) NOT NULL,
   FOREIGN KEY fk_categoryId(categoryId) REFERENCES Category(categoryId) ON DELETE CASCADE);  
 
 CREATE TABLE Customer (
