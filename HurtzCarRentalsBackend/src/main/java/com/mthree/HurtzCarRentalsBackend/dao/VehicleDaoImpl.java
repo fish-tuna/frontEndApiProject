@@ -26,14 +26,7 @@ public class VehicleDaoImpl implements VehicleDao {
     
     @Autowired
     JdbcTemplate jdbc;
-    
-    /*
-    String licensePlate;
-    int categoryId;
-    int modelId; 
-    String color;
-    */
-    
+
     @Override
     public Vehicle getVehicleByLicensePlate(String vehicleLicensePlate) {
         try {
