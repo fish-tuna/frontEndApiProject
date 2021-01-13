@@ -41,7 +41,7 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public void setCustomerLicenseNumber(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 

@@ -51,14 +51,12 @@ public class VehicleController {
     //UPDATE VEHICLE
     @PutMapping("/vehicles/{vehicleLicensePlate}")
     Vehicle updateVehicle(@RequestBody Vehicle newVehicle, @PathVariable String vehicleLicensePlate) {
- 
-        return vehicleDao.getVehicleByLicensePlate(vehicleLicensePlate).map(vehicle -> {
-            vehicle.setCategoryId(newVehicle.getCategoryId());
-            vehicle.setModelId(newVehicle.getModelId());
-            vehicle.setColor(newVehicle.getColor());
-            return vehicleDao.updateVehicle(vehicle);
-
-        });
+        Vehicle old = vehicleDao.getVehicleByLicensePlate(vehicleLicensePlate);
+        old.setCategoryId(newVehicle.getCategoryId());
+        old.setModelId(newVehicle.getModelId());
+        old.setColor(newVehicle.getColor());
+        vehicleDao.updateVehicle(old);
+        return old;
     }
 
     //DELETE VEHICLE
