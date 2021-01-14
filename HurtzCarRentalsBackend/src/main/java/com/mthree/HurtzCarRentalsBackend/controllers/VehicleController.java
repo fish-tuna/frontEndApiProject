@@ -7,6 +7,7 @@ package com.mthree.HurtzCarRentalsBackend.controllers;
 
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,9 +43,11 @@ public class VehicleController {
         return vehicleDao.getVehicleByLicensePlate(vehicleLicensePlate);
     }
     
-    //GET VEHICLES ON DATE (calls between dates on the same date twice)
-    
     //GET VEHICLES BETWEEN DATES INCLUSIVE
+    @GetMapping("/vehicles?start={start}?end={end}")
+    public List<Vehicle> getAllAvailableVehiclesBetween(@PathVariable Date start, @PathVariable Date end) {
+        return vehicleDao.getAllAvailableVehiclesBetween(start, end);
+    }
 
     //ADD VEHICLE
     @PostMapping("/vehicles")
