@@ -76,19 +76,19 @@ public class VehicleDaoDBTest {
     @Test
     public void testAddVehicle() {
         
-        Vehicle v = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle v = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao, makeDao);
         
         Vehicle v1 = vehicleDao.getVehicleByLicensePlate("GO-BEARS");
         assertEquals(v, v1);
-        Vehicle v2 = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle v2 = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao, makeDao);
         assertNotEquals(v1, v2);
     }
     
     @Test
     public void testUpdateVehicle() {
         
-        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
-        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao, makeDao);
+        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao, makeDao);
         Vehicle oldMine = vehicleDao.getVehicleByLicensePlate(mine.getLicensePlate());
         mine.setColor("black");
         vehicleDao.updateVehicle(mine);
@@ -101,8 +101,8 @@ public class VehicleDaoDBTest {
     
     @Test
     public void testDeleteVehicleByLicensePlate() {
-        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
-        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao);
+        Vehicle bears = TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao, makeDao);
+        Vehicle mine = TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao, makeDao);
         vehicleDao.deleteVehicleByLicensePlate("BENNETT");
         Vehicle nothing = vehicleDao.getVehicleByLicensePlate("BENNETT");
         assertEquals(nothing, null);

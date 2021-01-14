@@ -49,20 +49,20 @@ public class TestUtil {
         Model outback = modelDao.addModel(new Model(0, "Outback", subaru.getMakeId()));
     }
     
-    public static Vehicle makeBearsVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao) {
+    public static Vehicle makeBearsVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao, MakeDao makeDao) {
         Category sedan = categoryDao.getCategoryByName("Sedan");
-        Model m = modelDao.getModelByName("Crosstrek");
-        return vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan.getCategoryId(), m.getModelId(), "blue", "Crosstrek", "Subaru"));
+        Model model = modelDao.getModelByName("Crosstrek");
+        Make make = makeDao.getMakeByName("Subaru");
+        return vehicleDao.addVehicle(new Vehicle("GO-BEARS", sedan, model, make, "Blue"));
     }
     
-    public static Vehicle makeMyVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao) {
+    public static Vehicle makeMyVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao, MakeDao makeDao) {
         return vehicleDao.addVehicle(
                 new Vehicle("BENNETT", 
-                            categoryDao.getCategoryByName("Sedan").getCategoryId(), 
-                            modelDao.getModelByName("Outback").getModelId(),
-                            "red",
-                            "Outback",
-                            "Subaru"));
+                            categoryDao.getCategoryByName("Sedan"), 
+                            modelDao.getModelByName("Outback"),
+                            makeDao.getMakeByName("Subaru"),
+                            "Red"));
     }
     
     public static Customer makeFirstCustomer(CustomerDao customerDao) {

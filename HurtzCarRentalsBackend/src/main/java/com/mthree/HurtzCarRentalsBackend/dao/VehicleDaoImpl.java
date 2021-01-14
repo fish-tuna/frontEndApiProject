@@ -66,28 +66,32 @@ public class VehicleDaoImpl implements VehicleDao {
 
     @Override
     public Vehicle addVehicle(Vehicle v) {
-        final String INSERT_VEHICLE = "INSERT INTO Vehicle(licensePlate, categoryId, modelId, color, modelName, makeName) "
-                + "VALUES(?,?,?,?,?,?)";
+        final String INSERT_VEHICLE = "INSERT INTO Vehicle(licensePlate, categoryId, modelId, color, modelName, makeName, categoryName, categoryPrice) "
+                + "VALUES(?,?,?,?,?,?,?,?)";
         jdbc.update(INSERT_VEHICLE,
                 v.getLicensePlate(),
                 v.getCategoryId(),
                 v.getModelId(),
                 v.getColor(),
                 v.getModelName(),
-                v.getMakeName());
+                v.getMakeName(),
+                v.getCategoryName(),
+                v.getCategoryPrice());
         return v;
     }
 
     @Override
     public void updateVehicle(Vehicle v) {
         final String UPDATE_VEHICLE = "UPDATE Vehicle SET categoryId = ?, "
-                + "modelId = ?, color = ?, makeName = ?, modelName = ? WHERE licensePlate = ?";
+                + "modelId = ?, color = ?, makeName = ?, modelName = ?, categoryName = ?, categoryPrice = ? WHERE licensePlate = ?";
         jdbc.update(UPDATE_VEHICLE,
                 v.getCategoryId(),
                 v.getModelId(),
                 v.getColor(),
                 v.getModelName(),
                 v.getMakeName(),
+                v.getCategoryName(),
+                v.getCategoryPrice(),
                 v.getLicensePlate());
     }
     
@@ -111,7 +115,9 @@ public class VehicleDaoImpl implements VehicleDao {
                                     rs.getInt("modelId"),
                                     rs.getString("color"),
                                     rs.getString("makeName"),
-                                    rs.getString("modelName"));
+                                    rs.getString("modelName"),
+                                    rs.getString("categoryName"),
+                                    rs.getDouble("categoryPrice"));
             return v;
         }
     }

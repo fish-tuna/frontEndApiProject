@@ -56,7 +56,7 @@ public class ReservationDaoDBTest {
     public void setUp() {
         TestUtil.clearAll(categoryDao, makeDao, modelDao, vehicleDao, reservationDao, customerDao);
         TestUtil.setupSubarus(categoryDao, makeDao, modelDao);
-        TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao);
+        TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao, makeDao);
     }
     
     @Test

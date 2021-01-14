@@ -15,9 +15,12 @@ public class Vehicle {
     String licensePlate; //primary key
     int categoryId;
     int modelId; 
-    String modelName = "default";
-    String makeName = "default";
+    double categoryPrice;
+    String categoryName;
+    String modelName;
+    String makeName;
     String color;
+    
     
     
     public Vehicle() {
@@ -29,14 +32,35 @@ public class Vehicle {
         return "Vehicle{" + "licensePlate=" + licensePlate + ", categoryId=" + categoryId + ", modelId=" + modelId + ", color=" + color + '}';
     }
     
-    public Vehicle(String licensePlate, int categoryId, int modelId, String color, String modelName, String makeName) {
+    public Vehicle(String licensePlate, Category category, Model model, Make make, String color) {
         this.licensePlate = licensePlate;
-        this.categoryId = categoryId;
-        this.modelId = modelId;
+        this.categoryId = category.getCategoryId();
+        this.categoryName = category.getCategoryName();
+        this.modelId = model.getModelId();
+        this.modelName = model.getModelName();
+        this.makeName = make.getMakeName();        
         this.color = color;
     }
     
     
+    public Vehicle(String licensePlate, int categoryId, int modelId, String color, String modelName, String makeName, String categoryName, double categoryPrice) {
+        this.licensePlate = licensePlate;
+        this.categoryId = categoryId;
+        this.modelId = modelId;
+        this.color = color;
+        this.modelName = modelName;
+        this.makeName = makeName;
+        this.categoryName = categoryName;
+        this.categoryPrice = categoryPrice;
+    }
+    
+    public double getCategoryPrice() {
+        return this.categoryPrice;
+    }
+    
+    public String getCategoryName() {
+        return categoryName;
+    }
 
     public String getLicensePlate() {
         return licensePlate;
