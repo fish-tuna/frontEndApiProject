@@ -6,6 +6,7 @@
 package com.mthree.HurtzCarRentalsBackend.controllers;
 
 import com.mthree.HurtzCarRentalsBackend.dao.VehicleDao;
+import com.mthree.HurtzCarRentalsBackend.entity.DatePair;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +48,11 @@ public class VehicleController {
     @GetMapping("/vehicles?start={start}?end={end}")
     public List<Vehicle> getAllAvailableVehiclesBetween(@PathVariable Date start, @PathVariable Date end) {
         return vehicleDao.getAllAvailableVehiclesBetween(start, end);
+    }
+    
+    @GetMapping("/vehiclesBetween")
+    public List<Vehicle> getAllAvailableVehiclesBetween(@RequestBody DatePair datePair) {
+        return vehicleDao.getAllAvailableVehiclesBetween(datePair.getStartDate(), datePair.getEndDate());
     }
 
     //ADD VEHICLE
