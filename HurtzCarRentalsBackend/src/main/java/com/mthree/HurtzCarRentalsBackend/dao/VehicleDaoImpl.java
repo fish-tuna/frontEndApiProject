@@ -57,10 +57,28 @@ public class VehicleDaoImpl implements VehicleDao {
         return allVehicles;
         */
         
-        final String GET_AVAILABLE = "SELECT * FROM Vehicle JOIN Reservation ON Vehicle.licensePlate = Reservation.licensePlate" +
+        
+        //FROM frontend-home
+        final String GET_AVAILABLE = "SELECT * FROM Vehicle "
+                + "WHERE Vehicle.licensePlate NOT IN ("
+                + "SELECT Vehicle.licensePlate "
+                + "FROM Vehicle "
+                + "JOIN Reservation ON Vehicle.licensePlate = Reservation.licensePlate "
+                + "WHERE Reservation.startDate BETWEEN ? AND ? "
+                + "OR Reservation.endDate BETWEEN ? AND ? "
+                + "OR (Reservation.startDate < ? AND Reservation.endDate > ? "
+                + "));";
+        List<Vehicle> available = jdbc.query(GET_AVAILABLE, new VehicleMapper(),
+                startDate, endDate,
+                startDate, endDate,
+                startDate, endDate);
+
+        
+        
+        /*final String GET_AVAILABLE = "SELECT * FROM Vehicle JOIN Reservation ON Vehicle.licensePlate = Reservation.licensePlate" +
 "                WHERE NOT (startDate < Reservation.startDate AND endDate > Reservation.endDate)";
         List<Vehicle> available = jdbc.query(GET_AVAILABLE, new VehicleMapper());
-        
+        */
         return available;
     }
 

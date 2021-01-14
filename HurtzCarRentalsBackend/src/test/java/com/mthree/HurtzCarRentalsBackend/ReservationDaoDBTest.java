@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
@@ -89,6 +90,32 @@ public class ReservationDaoDBTest {
         System.out.println(reservation.toString());
         System.out.println(fromDao.toString());
         assertEquals(reservation, fromDao);
+    }
+    
+    @Test
+    public void testGetAvailableVehicles() {
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(2021,1,15);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(2021,1,20);
+        Calendar myBday = Calendar.getInstance();
+        myBday.set(1996, 8, 14);
+        Customer me = TestUtil.makeCustomerWithName(customerDao, "Bennett", "Foley", myBday.getTime(), "1234", 0);
+        Reservation reservation = reservationDao.addReservation(new Reservation(0, 
+                                                                    me.getCustomerId(), 
+                                                                    "VANITY", 
+                                                                    startDate.getTime(), 
+                                                                    endDate.getTime(), 1.0, 3.0, 0.0));
+        List<Vehicle> vehicles = vehicleDao.getAllAvailableVehiclesBetween(startDate.getTime(), endDate.getTime());
+        boolean found = false;
+        for (Vehicle v : vehicles) {
+            System.out.println("KEYWORD:" + v.toString());
+            if (v.getLicensePlate().equals("VANITY")) {
+                found = true;
+            }
+        }
+        assertFalse(found);
+        
     }
     
     @Test
