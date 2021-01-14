@@ -41,32 +41,27 @@ public class VehicleDaoImpl implements VehicleDao {
     public List<Vehicle> getAllVehicles() {
         final String SELECT_ALL_VEHICLES = "SELECT * FROM Vehicle";
         return jdbc.query(SELECT_ALL_VEHICLES, new VehicleMapper());
-    }
-    
+    }    
+
     @Override
     public List<Vehicle> getAllAvailableVehiclesBetween(Date startDate, Date endDate) {
         /*
-        reference: bool overlap = a.start < b.end && b.start < a.end;
+        final String GET_NOT_AVAILABLE = "SELECT * FROM Vehicle JOIN Reservation ON Vehicle.licensePlate = Reservation.licensePlate" +
+"                WHERE startDate < Reservation.startDate AND endDate > Reservation.endDate";
+        List<Vehicle> notAvailable = jdbc.query(GET_NOT_AVAILABLE, new VehicleMapper());
         
-        sd, ed = start_date, end_date on sql server, respectively.
-        (i.e. startDate is the startDate in this function's arguments, whereas sd is the one in the db that we're comparing to)
+        List<Vehicle> allVehicles = getAllVehicles();
         
-        overlappingReservations = get all reservations that have sd < endDate and startDate < ed
-            select * where 
-                startDate < ed and
-                sd < endDate
+        allVehicles.removeAll(notAvailable);
         
-        overlappingPlates = getLicensePlates(overlappingReservations);
-
-        vehicles vs = get all vehicles
-        find all vehicles v not in overlappingPlates
+        return allVehicles;
         */
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<Vehicle> getAllAvailableVehiclesOnDate(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        final String GET_AVAILABLE = "SELECT * FROM Vehicle JOIN Reservation ON Vehicle.licensePlate = Reservation.licensePlate" +
+"                WHERE NOT (startDate < Reservation.startDate AND endDate > Reservation.endDate)";
+        List<Vehicle> available = jdbc.query(GET_AVAILABLE, new VehicleMapper());
+        
+        return available;
     }
 
     @Override

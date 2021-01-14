@@ -16,7 +16,6 @@ import java.util.List;
 public interface VehicleDao {
     public Vehicle getVehicleByLicensePlate(String vehicleLicensePlate);
     public List<Vehicle> getAllVehicles();
-    public List<Vehicle> getAllAvailableVehiclesOnDate(Date date);
     public List<Vehicle> getAllAvailableVehiclesBetween(Date startDate, Date endDate);
     public Vehicle addVehicle(Vehicle v);
     public void updateVehicle(Vehicle v);    
