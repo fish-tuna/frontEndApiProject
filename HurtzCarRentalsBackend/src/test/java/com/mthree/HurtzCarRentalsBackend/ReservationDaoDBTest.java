@@ -15,8 +15,10 @@ import com.mthree.HurtzCarRentalsBackend.entity.Customer;
 import com.mthree.HurtzCarRentalsBackend.entity.Reservation;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,30 +58,25 @@ public class ReservationDaoDBTest {
     public void setUp() {
         TestUtil.clearAll(categoryDao, makeDao, modelDao, vehicleDao, reservationDao, customerDao);
         TestUtil.setupSubarus(categoryDao, makeDao, modelDao);
+        TestUtil.setupLexus(categoryDao, makeDao, modelDao);
+        TestUtil.makeMyVehicle(categoryDao, modelDao, vehicleDao, makeDao);
         TestUtil.makeBearsVehicle(categoryDao, modelDao, vehicleDao, makeDao);
+        TestUtil.makeLuxuryVehicle(categoryDao, modelDao, vehicleDao, makeDao, "Blue", "VANITY");
+        TestUtil.makeLuxuryVehicle(categoryDao, modelDao, vehicleDao, makeDao, "Red", "PLATE");
     }
+    
+    /*
+    int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
+    */
     
     @Test
     public void testAddReservation() {
-        Reservation reservation = new Reservation();
-        Customer first = TestUtil.makeFirstCustomer(customerDao);
-        
-        reservation.setBeforeTax(1.00);
-        reservation.setCustomerId(first.getCustomerId());
-        reservation.setDiscount(0.00);
-        reservation.setReservationId(294);
-        reservation.setTax(3.00);
-        reservation.setLicensePlate("GO-BEARS");
-        
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(2021,2,1);
-        reservation.setStartDate(startDate.getTime());
-        
-        Calendar endDate = Calendar.getInstance();
-        endDate.set(2021,2,5);
-        reservation.setEndDate(endDate.getTime());
-        
-        reservationDao.addReservation(reservation);
+        Customer me = TestUtil.makeCustomerWithName(customerDao, "Bennett", "Foley", new Date(1996, 8, 14), "1234", 0);
+        Reservation reservation = reservationDao.addReservation(new Reservation(0, 
+                                                                    me.getCustomerId(), 
+                                                                    "VANITY", 
+                                                                    new Date(2021, 1, 15), 
+                                                                    new Date(2021, 1, 20), 1.0, 3.0, 0.0));
         
         Reservation fromDao = reservationDao.getReservationById(reservation.getReservationId());
         assertEquals(reservation, fromDao);
@@ -87,15 +84,14 @@ public class ReservationDaoDBTest {
     
     @Test
     public void testDeleteReservation() {
-        
-        Reservation reservation = new Reservation();
+        Customer me = TestUtil.makeCustomerWithName(customerDao, "Bennett", "Foley", new Date(1996, 8, 14), "1234", 0);
+        Reservation reservation = reservationDao.addReservation(new Reservation(0, 
+                                                                    me.getCustomerId(), 
+                                                                    "VANITY", 
+                                                                    new Date(2021, 1, 15), 
+                                                                    new Date(2021, 1, 20), 1.0, 3.0, 0.0));
         Customer first = TestUtil.makeFirstCustomer(customerDao);
-        reservation.setBeforeTax(1.00);
-        reservation.setCustomerId(first.getCustomerId());
-        reservation.setDiscount(0.00);
-        reservation.setReservationId(294);
-        reservation.setTax(3.00);
-        reservation.setLicensePlate("GO-BEARS");
+        
         
         Calendar startDate = Calendar.getInstance();
         startDate.set(2021,2,1);
@@ -105,7 +101,7 @@ public class ReservationDaoDBTest {
         endDate.set(2021,2,5);
         reservation.setEndDate(endDate.getTime());
         
-        reservationDao.addReservation(reservation);
+        reservationDao.updateReservation(reservation);
         
         Reservation fromDao = reservationDao.getReservationById(reservation.getReservationId());
         assertEquals(reservation, fromDao);
@@ -120,14 +116,13 @@ public class ReservationDaoDBTest {
     @Test
     public void testUpdateReservation() {
         
-        Reservation reservation = new Reservation();
+        Customer me = TestUtil.makeCustomerWithName(customerDao, "Bennett", "Foley", new Date(1996, 8, 14), "1234", 0);
+        Reservation reservation = reservationDao.addReservation(new Reservation(0, 
+                                                                    me.getCustomerId(), 
+                                                                    "VANITY", 
+                                                                    new Date(2021, 1, 15), 
+                                                                    new Date(2021, 1, 20), 1.0, 3.0, 0.0));
         Customer first = TestUtil.makeFirstCustomer(customerDao);
-        reservation.setBeforeTax(1.00);
-        reservation.setCustomerId(first.getCustomerId());
-        reservation.setDiscount(0.00);
-        reservation.setReservationId(294);
-        reservation.setTax(3.00);
-        reservation.setLicensePlate("GO-BEARS");
         
         Calendar startDate = Calendar.getInstance();
         startDate.set(2021,2,1);
@@ -137,7 +132,7 @@ public class ReservationDaoDBTest {
         endDate.set(2021,2,5);
         reservation.setEndDate(endDate.getTime());
         
-        reservationDao.addReservation(reservation);
+        reservationDao.updateReservation(reservation);
         
         Reservation fromDao = reservationDao.getReservationById(reservation.getReservationId());
         assertEquals(reservation, fromDao);
@@ -146,7 +141,7 @@ public class ReservationDaoDBTest {
         reservationDao.updateReservation(reservation);
         
         fromDao = reservationDao.getReservationById(reservation.getReservationId());
-        assertEquals(reservation, fromDao);
+        assertNotEquals(reservation, fromDao);
             
     }
     

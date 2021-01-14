@@ -98,8 +98,7 @@ public class ReservationDaoImpl implements ReservationDao {
                                             rs.getDate("endDate"),
                                             rs.getDouble("beforeTaxPrice"),
                                             rs.getDouble("tax"),
-                                            rs.getDouble("discount"),
-                                            rs.getDouble("totalPrice"));           
+                                            rs.getDouble("discount"));           
             return r;
         }
     }

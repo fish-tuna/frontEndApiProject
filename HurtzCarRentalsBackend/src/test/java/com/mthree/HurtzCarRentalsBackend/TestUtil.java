@@ -18,6 +18,7 @@ import com.mthree.HurtzCarRentalsBackend.entity.Model;
 import com.mthree.HurtzCarRentalsBackend.entity.Reservation;
 import com.mthree.HurtzCarRentalsBackend.entity.Vehicle;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,8 +46,35 @@ public class TestUtil {
         Category sedan = categoryDao.addCategory(new Category("Sedan", 75));
         Category luxury = categoryDao.addCategory(new Category("Luxury", 125));
         Make subaru = makeDao.addMake(new Make(0, "Subaru"));
+        
         Model crosstrek = modelDao.addModel(new Model(0, "Crosstrek", subaru.getMakeId()));
         Model outback = modelDao.addModel(new Model(0, "Outback", subaru.getMakeId()));
+        
+    }
+    
+    public static void setupLexus(CategoryDao categoryDao, MakeDao makeDao, ModelDao modelDao) {
+        Make lexus = makeDao.addMake(new Make(0, "Lexus"));
+        Model ls = modelDao.addModel(new Model(0, "LS", lexus.getMakeId()));
+    }
+    
+    public static Vehicle makeLuxuryVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao, MakeDao makeDao, String color, String licensePlate) {
+        Category luxury = categoryDao.getCategoryByName("Luxury");
+        Model ls = modelDao.getModelByName("LS");
+        Make lexus = makeDao.getMakeByName("Lexus");
+        return vehicleDao.addVehicle(new Vehicle(licensePlate, luxury, ls, lexus, color));
+    }
+    /*
+    
+    int customerId;
+    String firstName;
+    String lastName;
+    Date dob;
+    String licenseNumber;
+    int loyaltyPts;
+    int customerId, String firstName, String lastName, Date dob, String licenseNumber, int loyaltyPts) {
+    */
+    public static Customer makeCustomerWithName(CustomerDao customerDao, String firstName, String lastName, Date dob, String licenseNumber, int loyaltyPts) {
+        return customerDao.addCustomer(new Customer(0, firstName, lastName, dob , licenseNumber, loyaltyPts));
     }
     
     public static Vehicle makeBearsVehicle(CategoryDao categoryDao, ModelDao modelDao, VehicleDao vehicleDao, MakeDao makeDao) {

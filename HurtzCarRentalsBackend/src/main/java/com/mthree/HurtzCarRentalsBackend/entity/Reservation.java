@@ -25,15 +25,13 @@ public class Reservation {
     double discount;
     double totalPrice;    
     
-    public Reservation() {
-    }
 
     @Override
     public String toString() {
         return "Reservation{" + "reservationId=" + reservationId + ", customerId=" + customerId + ", licensePlate=" + licensePlate + ", startDate=" + startDate + ", endDate=" + endDate + ", beforeTax=" + beforeTax + ", tax=" + tax + ", discount=" + discount + ", totalPrice=" + totalPrice + '}';
     }
 
-    public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount, double totalPrice) {
+    public Reservation(int reservationId, int customerId, String licensePlate, Date startDate, Date endDate, double beforeTax, double tax, double discount) {
         this.reservationId = reservationId;
         this.customerId = customerId;
         this.licensePlate = licensePlate;
@@ -42,7 +40,7 @@ public class Reservation {
         this.beforeTax = beforeTax;
         this.tax = tax;
         this.discount = discount;
-        this.totalPrice = totalPrice;
+        this.totalPrice = beforeTax + tax - discount;
     }
 
        
