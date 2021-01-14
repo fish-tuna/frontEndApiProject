@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button, Segment, Grid, Header } from "semantic-ui-react";
 import SearchFields from "./SearchFields";
-function Add() {
+function AddHomepage() {
   //conditional display, use buttons to set state
   const [window, setWindow] = useState(null);
   return (
     <div>
       <Segment.Group>
         <Header as="h1" block textAlign="center">
-          Add
+          Homepage
         </Header>
         <Grid columns={3}>
           <Grid.Column textAlign="center">
@@ -31,4 +31,4 @@ function Add() {
   );
 }
 
-export default Add;
+export default AddHomepage;
