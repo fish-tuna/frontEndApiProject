@@ -50,11 +50,11 @@ public class VehicleController {
         return vehicleDao.getAllAvailableVehiclesBetween(start, end);
     }
     
-    @GetMapping("/vehiclesBetween")
+    @PostMapping("/vehiclesBetween")
     public List<Vehicle> getAllAvailableVehiclesBetween(@RequestBody DatePair datePair) {
         return vehicleDao.getAllAvailableVehiclesBetween(datePair.getStartDate(), datePair.getEndDate());
     }
-
+    
     //ADD VEHICLE
     @PostMapping("/vehicles")
     Vehicle addVehicle(@RequestBody Vehicle newVehicle) {
